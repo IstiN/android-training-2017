@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
         //changes in new branch
         //I'm the first!
         Log.d(LOG, "onCreate is called");
+        System.out.println("some info");
     }
 
 }
