@@ -10,6 +10,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //changes in new branch
+        //I'm the first!
     }
 
 }
