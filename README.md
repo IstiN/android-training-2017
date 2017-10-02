@@ -2,6 +2,15 @@
 Project for android training
 Some changes
 
+Project requirements:
+
+0. Server App(for example)
+1. Work with API (json, xml) example vk, facebook
+2. Cache (DB)
+3. View - hard example vk/facebook news feed
+4. Threading
+5. ImageLoader - no libraries! + File Cache + Memory Cache + Threadings
+6. Flavors
 
 #HW: 02.10.2017
 
