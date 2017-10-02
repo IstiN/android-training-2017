@@ -2,6 +2,7 @@ package com.epam.androidtraining;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -11,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //changes in new branch
         //I'm the first!
+        System.out.println("some info");
     }
 
 }
