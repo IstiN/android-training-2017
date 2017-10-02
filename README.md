@@ -1,5 +1,6 @@
 # android-training-2017
 Project for android training
+Some changes
 
 
 #HW: 02.10.2017
