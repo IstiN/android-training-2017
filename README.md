@@ -14,6 +14,7 @@ Some changes
 7. Chery Pick
 8. Rebase
 9. Stash
+10. Tags
 
 #old one
 
