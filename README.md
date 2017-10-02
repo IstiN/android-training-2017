@@ -15,6 +15,11 @@ Some changes
 8. Rebase
 9. Stash
 10. Tags
+11. Submodules
+
+links:
+
+https://habrahabr.ru/post/106912/
 
 #old one
 
