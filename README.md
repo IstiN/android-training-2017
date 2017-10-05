@@ -12,6 +12,7 @@ Project requirements:
 5. ImageLoader - no libraries! + File Cache + Memory Cache + Threadings
 6. Flavors
 
+
 #HW: 02.10.2017 - deadline (8 Oct. Sunday 23.59)
 
 1. Create project (github || bitbucket), soursetree
