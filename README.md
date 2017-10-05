@@ -15,7 +15,7 @@ Project requirements:
 #HW: 05.10.2017 - deadline (11 Oct. Wednesday 23.59)
 1. setup roboelectric, mockito
 2. develop some business logic (for example calculator or part of logic from your future project)
-3. cover it by unitTest(mockito, robolectric) and instrumentationTest (espresso). Example of mock, spy, activityLifecycleMock with robolectric.
+3. cover it by unitTest(mockito, robolectric) and instrumentationTest (espresso). HW should contain examples of mock, spy, activityLifecycleMock with robolectric.
 
 
 
