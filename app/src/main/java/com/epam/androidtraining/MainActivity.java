@@ -1,7 +1,8 @@
 package com.epam.androidtraining;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,6 +17,12 @@ public class MainActivity extends AppCompatActivity {
         //I'm the first!
         Log.d(TAG, "onCreate is called");
         Log.d(TAG, "one more log:)");
+
+        startCalculatorActivity();
+    }
+
+    public void startCalculatorActivity() {
+        startActivity(new Intent(this, CalculatorActivity.class));
     }
 
     public void someMethod() {
