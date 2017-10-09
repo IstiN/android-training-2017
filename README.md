@@ -23,10 +23,11 @@ Project requirements:
 2. prepare responses with jsonObject and jsonArray
 3. parse responses over JSONObject/JSONArray
 4. parse responses over GSON
+5. convert time from'registered' field to friendly value over GSON Type adapter. For example 1507582371121 to 09 Oct 2017, 20:52:51. If your response don't contain UNIX time, you can convert any other field
 
 cover parsing by test
 
-TODO for Ilya. Add twitter response.
+sample json file added to project (generated.json)
 
 
 #HW: 02.10.2017 - deadline (8 Oct. Sunday 23.59)
