@@ -18,6 +18,16 @@ Project requirements:
 3. cover it by unitTest(mockito, robolectric) and instrumentationTest (espresso). HW should contain examples of mock, spy, activityLifecycleMock with robolectric.
 
 
+#HW: 09.10.2017 - deadline (15 Oct. Sunday 23.59)
+1. create httpClient and mock it
+2. prepare responses with jsonObject and jsonArray
+3. parse responses over JSONObject/JSONArray
+4. parse responses over GSON
+
+cover parsing by test
+
+TODO for Ilya. Add twitter response.
+
 
 #HW: 02.10.2017 - deadline (8 Oct. Sunday 23.59)
 

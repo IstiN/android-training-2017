@@ -1,0 +1,15 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "First Name and Last Name",
+      "avatar": "http://placehold.it/32x32"
+    },
+    {
+      "id": 2,
+      "name": "First Name2 and Last Name2",
+      "avatar": "http://placehold.it/32x32"
+    }
+  ],
+  "backendVersion": 1
+}
