@@ -15,14 +15,8 @@ Project requirements:
 5. ImageLoader - no libraries! + File Cache + Memory Cache + Threadings
 6. Flavors
 
-#HW: 05.10.2017 - deadline (11 Oct. Wednesday 23.59)
-1. setup roboelectric, mockito
-2. develop some business logic (for example calculator or part of logic from your future project)
-3. cover it by unitTest(mockito, robolectric) and instrumentationTest (espresso). HW should contain examples of mock, spy, activityLifecycleMock with robolectric.
-
-
 #HW: 09.10.2017 - deadline (15 Oct. Sunday 23.59)
-1. create httpClient and mock it
+1. create interface for HttpClient and mock it
 2. prepare responses with jsonObject and jsonArray
 3. parse responses over JSONObject/JSONArray
 4. parse responses over GSON
@@ -31,6 +25,11 @@ Project requirements:
 cover parsing by test
 
 sample json file added to project (generated.json)
+
+#HW: 05.10.2017 - deadline (11 Oct. Wednesday 23.59)
+1. setup roboelectric, mockito
+2. develop some business logic (for example calculator or part of logic from your future project)
+3. cover it by unitTest(mockito, robolectric) and instrumentationTest (espresso). HW should contain examples of mock, spy, activityLifecycleMock with robolectric.
 
 
 #HW: 02.10.2017 - deadline (8 Oct. Sunday 23.59)
