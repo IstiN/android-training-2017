@@ -1,10 +1,12 @@
 package com.epam.androidtraining;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Pair;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -36,8 +38,10 @@ public class CalculatorActivity extends AppCompatActivity {
         mCalculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String result = mCalculator.evaluate(mInputEditText.getText().toString());
-                showResult(result);
+                /*String result = mCalculator.evaluate(mInputEditText.getText().toString());
+                showResult(result);*/
+               // new EndpointsAsyncTask().execute(new Pair<Context, String>(CalculatorActivity.this, "Manfred"));
+                new UserListLoader().execute(CalculatorActivity.this);
             }
         });
 
@@ -54,12 +58,12 @@ public class CalculatorActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                int length = editable.length();
+                /*int length = editable.length();
                 if (length > 0) {
                     mCalculateButton.setEnabled(true);
                 } else {
                     mCalculateButton.setEnabled(false);
-                }
+                }*/
             }
         });
 

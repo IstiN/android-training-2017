@@ -1,15 +1,19 @@
 {
-  "users": [
+  "items": [
     {
-      "id": 1,
-      "name": "First Name and Last Name",
-      "avatar": "http://placehold.it/32x32"
+      "id": "67",
+      "name": "Vasia",
+      "avatar": "Fh",
+      "kind": "userApi#resourcesItem"
     },
     {
-      "id": 2,
-      "name": "First Name2 and Last Name2",
-      "avatar": "http://placehold.it/32x32"
+      "id": "1523636",
+      "name": "Kate",
+      "avatar": "yueiduhd",
+      "kind": "userApi#resourcesItem"
     }
   ],
-  "backendVersion": 1
+  "nextPageToken": "CisSJWoVZ35pbmZyYS12ZXJ0ZXgtMTgyNzE2cgwLEgRVc2VyGLT_XAwYACAA",
+  "kind": "userApi#resources",
+  "etag": "\"R1JnbnJKwvkMCUSlBW8iLdfwRf4/dUsb-ResDYUpxvzjpQ49EtrbIhw\""
 }

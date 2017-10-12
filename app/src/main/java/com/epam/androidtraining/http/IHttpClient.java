@@ -1,8 +1,6 @@
 package com.epam.androidtraining.http;
 
-import java.io.InputStream;
-
 public interface IHttpClient {
 
-    InputStream request(String url);
+    void request(String url, HttpClient.ResponseListener listener);
 }

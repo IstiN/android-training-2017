@@ -15,6 +15,12 @@ Project requirements:
 5. ImageLoader - no libraries! + File Cache + Memory Cache + Threadings
 6. Flavors
 
+#HW: 12.10.2017 - deadline (18 Oct. Sunday 23.59)
+1. Create and deploy backend module to the Google App Engine
+2. Save and get some information from your API through app and html page(for example: you can set two numbers, do some operation on backend, and return result )
+3. (For reading)* GCM
+
+
 #HW: 09.10.2017 - deadline (15 Oct. Sunday 23.59)
 1. create interface for HttpClient and mock it
 2. prepare responses with jsonObject and jsonArray

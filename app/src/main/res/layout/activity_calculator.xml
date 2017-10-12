@@ -13,8 +13,7 @@
         android:id="@+id/calculate_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="onCalculate"
-        android:enabled="false"/>
+        android:onClick="onCalculate" />
 
     <TextView
         android:id="@+id/result_text_view"
