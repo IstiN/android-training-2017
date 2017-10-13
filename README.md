@@ -18,10 +18,13 @@ Project requirements:
 #HW: 12.10.2017 - deadline (18 Oct. Sunday 23.59)
 1. Create and deploy backend module to the Google App Engine
 2. Save and get some information from your API through app and html page(for example: you can set two numbers, do some operation on backend, and return result )
-3. (For reading)* 
-   GCM ( https://github.com/GoogleCloudPlatform/gradle-appengine-templates/tree/master/GcmEndpoints )
-   Servlet (you can create the same backend module using servlet https://github.com/GoogleCloudPlatform/gradle-appengine-templates/tree/master/HelloWorld)
-   Firebase ( https://cloud.google.com/solutions/mobile/firebase-app-engine-android-studio )
+3. (For reading)*
+ 
+   GCM(https://github.com/GoogleCloudPlatform/gradle-appengine-templates/tree/master/GcmEndpoints)
+   
+   Servlet(you can create the same backend module using servlet https://github.com/GoogleCloudPlatform/gradle-appengine-templates/tree/master/HelloWorld)
+   
+   Firebase(https://cloud.google.com/solutions/mobile/firebase-app-engine-android-studio)
    
    **NOTE: Please when you create new issue with homework please provide link on compare ( you need add /compare to your main git link f.e. https://github.com/IstiN/android-training-2017/compare ) and do choice two commits.**
 
