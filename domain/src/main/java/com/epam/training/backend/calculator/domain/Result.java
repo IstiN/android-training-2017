@@ -1,4 +1,4 @@
-package com.epam.training.backend.calculator;
+package com.epam.training.backend.calculator.domain;
 
 import com.google.gson.annotations.SerializedName;
 

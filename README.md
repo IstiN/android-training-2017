@@ -15,6 +15,17 @@ Project requirements:
 5. ImageLoader - no libraries! + File Cache + Memory Cache + Threadings
 6. Flavors
 
+#HW: 16.10.2017 - deadline (25 Oct. Sunday 23.59)
+1. create merge request to fix tests in training project
+2. to create example with Mockito @Captor (ArgumentCaptor<Callback<Long>>)
+3. doReturn example for mockito
+4. create backend that will return config JSON with following information:  current_app_version(1,2,3...) compare with BuildConfig.VERSION_CODE, force_update(true - show dialog to upgrade without option to close, false - show dialog that update available with option to close)
+5. create separate backends for debug and release version
+6. create Google Play flavor and Amazon flavor
+7. separate config for Google Play and for Amazon
+
+
+
 #HW: 12.10.2017 - deadline (18 Oct. Sunday 23.59)
 1. Create and deploy backend module to the Google App Engine
 2. Save and get some information from your API through app and html page(for example: you can set two numbers, do some operation on backend, and return result )

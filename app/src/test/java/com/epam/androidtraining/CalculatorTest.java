@@ -8,24 +8,27 @@ import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
-public class CalculatorTest {
+public abstract class CalculatorTest {
 
 
     private ICalculator mCalculator;
 
     @Before
     public void setUp() {
-        mCalculator = spy(Calculator.class);
-//        mCalculator = new Calculator();
+        mCalculator = createCalculator();
     }
+
+    abstract ICalculator createCalculator();
 
     @Test
     public void testAdd() {
-        when(mCalculator.evaluate(Matchers.anyString())).thenReturn("4");
-        String result = mCalculator.add(1,2);
+        assertEquals("3", mCalculator.evaluate(Matchers.anyString()));
 
-        assertEquals(result, "3");
-        assertEquals(mCalculator.evaluate(Matchers.anyString()), "5");
+        final String result = mCalculator.add(1,2);
+        assertEquals("3", result);
+
+        when(mCalculator.evaluate(Matchers.anyString())).thenReturn("5");
+        assertEquals("5", mCalculator.evaluate(Matchers.anyString()));
     }
 
 

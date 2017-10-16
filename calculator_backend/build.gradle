@@ -24,7 +24,7 @@ targetCompatibility = JavaVersion.VERSION_1_7
 dependencies {
     appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.42'
     compile 'javax.servlet:servlet-api:2.5'
-    compile 'com.google.code.gson:gson:2.7'
+    compile project(':domain')
 }
 
 appengine {

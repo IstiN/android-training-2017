@@ -6,6 +6,7 @@
 
 package com.epam.training.backend.calculator;
 
+import com.epam.training.backend.calculator.domain.Result;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -38,8 +39,8 @@ public class CalculatorServlet extends HttpServlet {
         new Gson().toJson(result, pResponse.getWriter());
 
         //2
-        final String resultAsString = new Gson().toJson(result);
-        pResponse.getWriter().print(resultAsString);
+//        final String resultAsString = new Gson().toJson(result);
+//        pResponse.getWriter().print(resultAsString);
     }
 
     @Override

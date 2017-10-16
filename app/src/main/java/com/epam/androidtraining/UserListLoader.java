@@ -33,12 +33,17 @@ public class UserListLoader extends AsyncTask<Context, Void, String> {
 
         httpClient.request(Api.USER_URL, new HttpClient.ResponseListener() {
             @Override
-            public void onResponse(InputStream inputStream) {
+            public void onResponse(InputStream pInputStream) {
                 try {
-                    userListWithObject = usersListParserFactory.createParserForResponceWithObject(inputStream).parse();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    userListWithObject = usersListParserFactory.createParserForResponceWithObject(pInputStream).parse();
+                } catch (final Exception e) {
+                    onError(e);
                 }
+
+            }
+
+            @Override
+            public void onError(final Throwable pThrowable) {
 
             }
         });

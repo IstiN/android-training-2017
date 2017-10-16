@@ -12,10 +12,30 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            buildConfigField "String", "BASE_CALC_URL", "\"https://debugcalculator.appspot.com\""
+        }
         release {
+            buildConfigField "String", "BASE_CALC_URL", "\"https://releasecalculator.appspot.com\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    flavorDimensions "store"
+
+    productFlavors {
+
+        GooglePlay {
+            flavorDimension "store"
+            buildConfigField "String", "SHARE_URL", "\"http://mybestcalcforgooglestore.com\""
+        }
+
+        Amazon {
+            flavorDimension "store"
+            buildConfigField "String", "SHARE_URL", "\"http://mybestcalcforamazon.com\""
+        }
+
     }
 }
 
@@ -42,4 +62,6 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'com.google.code.gson:gson:2.7'
     compile project(path: ':backend', configuration: 'android-endpoints')
+
+    compile project(':domain')
 }

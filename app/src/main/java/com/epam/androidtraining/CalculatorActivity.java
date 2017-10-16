@@ -1,19 +1,17 @@
 package com.epam.androidtraining;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Pair;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 public class CalculatorActivity extends AppCompatActivity {
 
-    private ICalculator mCalculator = new Calculator();
+    private ICalculator mCalculator = new BackendCalculator();
     private TextView mResultTextView;
     private EditText mInputEditText;
     private View mCalculateButton;
@@ -38,10 +36,23 @@ public class CalculatorActivity extends AppCompatActivity {
         mCalculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*String result = mCalculator.evaluate(mInputEditText.getText().toString());
-                showResult(result);*/
+                /**/
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        final String result = mCalculator.evaluate(mInputEditText.getText().toString());
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showResult(result);
+                            }
+                        });
+                    }
+                }).start();
+
                // new EndpointsAsyncTask().execute(new Pair<Context, String>(CalculatorActivity.this, "Manfred"));
-                new UserListLoader().execute(CalculatorActivity.this);
+//                new UserListLoader().execute(CalculatorActivity.this);
             }
         });
 
