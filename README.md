@@ -15,6 +15,34 @@ Project requirements:
 5. ImageLoader - no libraries! + File Cache + Memory Cache + Threadings
 6. Flavors
 
+#Reviewed Android studio tools:
+Project
+Structure
+TODO
+Debug
+Android Monitor
+  logcat
+  layout inspecter
+  screen capture
+  memory monitors
+  memory dump
+  cpu monitor
+  network monitor
+  method profiler (Tools->Android->Android device monitor)
+Terminal
+
+Lint (Analyze->Inspect code...)
+
+Reviewed Android tools:
+Layout bounds
+Strict mode
+Don't keep activities
+GPU Overdraw
+
+https://developer.android.com/guide/topics/resources/providing-resources.html
+hotkey promoter plugin - https://plugins.jetbrains.com/plugin/4455-key-promoter
+Note. That lesson without homework
+
 #HW: 16.10.2017 - deadline (25 Oct. Sunday 23.59)
 1. create merge request to fix tests in training project
 2. to create example with Mockito @Captor (ArgumentCaptor<Callback<Long>>)
