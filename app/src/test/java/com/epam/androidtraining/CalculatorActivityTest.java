@@ -1,5 +1,7 @@
 package com.epam.androidtraining;
 
+import com.epam.androidtraining.activities.CalculatorActivity;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

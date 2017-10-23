@@ -15,6 +15,21 @@ Project requirements:
 5. ImageLoader - no libraries! + File Cache + Memory Cache + Threadings
 6. Flavors
 
+
+*********************************************************
+#HW: 23.10.2017 - deadline (01.11.2017 23.59)
+
+1. Create two fragments and interact between their using "Show" "Hide" method in FragmentTransaction
+
+2. Start activity using Intent flags(Example authorization for lunchMode)
+
+3. Create IntentService and send some data from BroadcastReceiver in activity
+
+4.*(optional) Try create authorization for your future application(only UI)
+
+*********************************************************
+
+
 #Reviewed Android studio tools:
 Project
 Structure

@@ -6,19 +6,29 @@
 
     <application
         android:allowBackup="true"
+        android:name=".CalcApp"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".CalculatorActivity"/>
+        <activity android:name=".activities.CalculatorActivity"/>
+        <activity android:name=".activities.LoginActivity"/>
+        <service android:name=".services.PlayerService"/>
+        <service android:name=".services.CalcService"/>
+        <service android:name=".services.CalcIntentService"/>
+        <receiver android:name=".receivers.PlayReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.AIRPLANE_MODE"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

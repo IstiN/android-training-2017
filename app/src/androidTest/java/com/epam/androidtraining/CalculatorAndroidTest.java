@@ -8,6 +8,8 @@ import android.support.test.rule.ActivityTestRule;
 import android.view.View;
 import android.widget.TextView;
 
+import com.epam.androidtraining.activities.CalculatorActivity;
+
 import org.junit.Test;
 
 import static android.support.test.espresso.Espresso.onView;
