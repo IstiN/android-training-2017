@@ -5,30 +5,27 @@ import org.junit.Test;
 import org.mockito.Matchers;
 
 import static junit.framework.Assert.assertEquals;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 
 public abstract class CalculatorTest {
 
+    abstract ICalculator createCalculator();
 
-    private ICalculator mCalculator;
+    protected ICalculator mCalculator;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         mCalculator = createCalculator();
     }
 
-    abstract ICalculator createCalculator();
-
     @Test
     public void testAdd() {
-        assertEquals("3", mCalculator.evaluate(Matchers.anyString()));
-
-        final String result = mCalculator.add(1,2);
+        if (mCalculator instanceof BackendCalculator) {
+            assertEquals("10", mCalculator.evaluate("5+5"));
+        } else {
+            assertEquals("3", mCalculator.evaluate(Matchers.anyString()));
+        }
+        final String result = mCalculator.add(1, 2);
         assertEquals("3", result);
-
-        when(mCalculator.evaluate(Matchers.anyString())).thenReturn("5");
-        assertEquals("5", mCalculator.evaluate(Matchers.anyString()));
     }
 
 
