@@ -15,6 +15,14 @@ Project requirements:
 5. ImageLoader - no libraries! + File Cache + Memory Cache + Threadings
 6. Flavors
 
+*********************************************************
+#HW: 30.10.2017 - deadline (10.11.2017 23.59)
+
+1. Layout your own 2 screens or Tweeter or Instagram main page
+
+2. Attach screenshots to project README
+
+*********************************************************
 
 *********************************************************
 #HW: 23.10.2017 - deadline (01.11.2017 23.59)

@@ -19,7 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activities.CalculatorActivity"/>
+        <activity android:name=".activities.CalculatorActivity"
+            android:exported="true"/>
         <activity android:name=".activities.LoginActivity"/>
         <service android:name=".services.PlayerService"/>
         <service android:name=".services.CalcService"/>
@@ -29,6 +30,9 @@
                 <action android:name="android.intent.action.AIRPLANE_MODE"/>
             </intent-filter>
         </receiver>
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

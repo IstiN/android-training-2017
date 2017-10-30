@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">UI</string>
+    <string name="btn_clear">C</string>
+    <string name="btn_plus_minus">+/-</string>
+    <string name="btn_percent">%</string>
+    <string name="btn_divide">÷</string>
+</resources>

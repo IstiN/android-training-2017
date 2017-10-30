@@ -1,0 +1,39 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="TextAppearance.InputField" parent="TextAppearance.AppCompat">
+        <item name="android:gravity">end</item>
+        <item name="android:textColor">@color/superdark</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextAppearance.InputField.Big">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="CalculatorButton">
+        <item name="android:layout_height">@dimen/calc_btn_heignt</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/light_gray</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/btn_selector</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="CalculatorButton.Operation">
+        <item name="android:background">@color/violet</item>
+    </style>
+
+    <style name="CalculatorButton.Equals">
+        <item name="android:background">@color/orange</item>
+        <item name="android:textColor">@color/superdark</item>
+    </style>
+
+</resources>

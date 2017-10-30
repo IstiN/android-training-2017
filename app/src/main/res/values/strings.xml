@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">My Android Training</string>
     <string name="set">btn_login_text</string>
+
 </resources>

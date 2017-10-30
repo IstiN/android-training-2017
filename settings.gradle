@@ -1,1 +1,1 @@
-include ':app', ':backend', ':calculator_backend', ':domain'
+include ':app', ':backend', ':calculator_backend', ':domain', ':ui', ':demo'
