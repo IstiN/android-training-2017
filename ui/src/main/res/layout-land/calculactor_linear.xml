@@ -3,13 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:baselineAligned="false">
 
     <LinearLayout
-        android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/result_text"
             style="@style/TextAppearance.InputField"
@@ -29,160 +31,9 @@
             tools:text="59÷12" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <include
+        layout="@layout/view_calc_keyboard"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:divider="@drawable/divider"
-        android:orientation="vertical"
-        android:showDividers="middle"
-        android:layout_gravity="bottom">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@drawable/divider"
-            android:orientation="horizontal"
-            android:showDividers="middle">
-
-            <TextView
-                style="@style/CalculatorButton"
-                android:layout_width="@dimen/calc_btn_heignt"
-                android:text="@string/btn_clear" />
-
-            <TextView
-                style="@style/CalculatorButton"
-                android:layout_width="@dimen/calc_btn_heignt"
-                android:text="@string/btn_plus_minus" />
-
-            <TextView
-                style="@style/CalculatorButton"
-                android:layout_width="@dimen/calc_btn_heignt"
-                android:text="@string/btn_percent" />
-
-            <TextView
-                style="@style/CalculatorButton.Operation"
-                android:layout_width="@dimen/calc_btn_heignt"
-                android:text="@string/btn_divide" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@drawable/divider"
-            android:orientation="horizontal"
-            android:showDividers="middle">
-
-            <TextView
-                style="@style/CalculatorButton"
-                android:layout_width="@dimen/calc_btn_heignt"
-                android:text="7" />
-
-            <TextView
-                style="@style/CalculatorButton"
-                android:layout_width="@dimen/calc_btn_heignt"
-                android:text="8" />
-
-            <TextView
-                style="@style/CalculatorButton"
-                android:layout_width="@dimen/calc_btn_heignt"
-                android:text="9" />
-
-            <TextView
-                style="@style/CalculatorButton.Operation"
-                android:layout_width="@dimen/calc_btn_heignt"
-                android:text="×" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@drawable/divider"
-            android:orientation="horizontal"
-            android:showDividers="middle">
-
-            <TextView
-                style="@style/CalculatorButton"
-                android:layout_width="@dimen/calc_btn_heignt"
-                android:text="4" />
-
-            <TextView
-                style="@style/CalculatorButton"
-                android:layout_width="@dimen/calc_btn_heignt"
-                android:text="5" />
-
-            <TextView
-                style="@style/CalculatorButton"
-                android:layout_width="@dimen/calc_btn_heignt"
-                android:text="6" />
-
-            <TextView
-                style="@style/CalculatorButton.Operation"
-                android:layout_width="@dimen/calc_btn_heignt"
-                android:text="-" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@drawable/divider"
-            android:orientation="horizontal"
-            android:showDividers="middle">
-
-            <TextView
-                android:id="@+id/btn_1"
-                style="@style/CalculatorButton"
-                android:layout_width="@dimen/calc_btn_heignt"
-                android:text="1" />
-
-            <TextView
-                style="@style/CalculatorButton"
-                android:layout_width="@dimen/calc_btn_heignt"
-                android:text="2" />
-
-            <TextView
-                style="@style/CalculatorButton"
-                android:layout_width="@dimen/calc_btn_heignt"
-                android:text="3" />
-
-            <TextView
-                android:id="@+id/btn_plus"
-                style="@style/CalculatorButton.Operation"
-                android:layout_width="@dimen/calc_btn_heignt"
-                android:text="+" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@drawable/divider"
-            android:orientation="horizontal"
-            android:showDividers="middle">
-
-            <TextView
-                style="@style/CalculatorButton"
-                android:layout_width="@dimen/calc_btn_heignt"
-                android:text="0" />
-
-            <TextView
-                style="@style/CalculatorButton"
-                android:layout_width="@dimen/calc_btn_heignt"
-                android:text="." />
-
-            <TextView
-                style="@style/CalculatorButton"
-                android:layout_width="@dimen/calc_btn_heignt"
-                android:text="del" />
-
-            <TextView
-                android:id="@+id/btn_eqauls"
-                style="@style/CalculatorButton.Equals"
-                android:layout_width="@dimen/calc_btn_heignt"
-                android:text="=" />
-
-        </LinearLayout>
-    </LinearLayout>
+        android:layout_gravity="bottom" />
 </LinearLayout>

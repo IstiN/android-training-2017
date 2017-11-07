@@ -1,0 +1,4 @@
+ext.versions = [
+    support: "26.1.0",
+    buildTools: "27.0.1"
+]

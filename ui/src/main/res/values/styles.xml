@@ -12,6 +12,7 @@
         <item name="android:gravity">end</item>
         <item name="android:textColor">@color/superdark</item>
         <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/advent_pro_light</item>
     </style>
 
     <style name="TextAppearance.InputField.Big">
@@ -19,16 +20,19 @@
     </style>
 
     <style name="CalculatorButton">
+        <item name="android:clickable">true</item>
         <item name="android:layout_height">@dimen/calc_btn_heignt</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/light_gray</item>
         <item name="android:gravity">center</item>
-        <item name="android:background">@drawable/btn_selector</item>
-        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="CalculatorButton.Numeric">
+        <item name="android:background">@drawable/selector_btn_numeric</item>
     </style>
 
     <style name="CalculatorButton.Operation">
-        <item name="android:background">@color/violet</item>
+        <item name="android:background">@drawable/selector_btn_operation</item>
     </style>
 
     <style name="CalculatorButton.Equals">

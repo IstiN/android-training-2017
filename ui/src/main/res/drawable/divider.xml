@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="line"
+    android:shape="rectangle"
     android:thickness="@dimen/divider_size">
-    <solid android:color="@color/superdark" />
-    <size android:width="@dimen/divider_size"
-        android:height="@dimen/divider_size"/>
+    <solid android:color="@color/gray" />
+    <size android:height="1dp"/>
+    <size android:width="1dp"/>
 
 </shape>

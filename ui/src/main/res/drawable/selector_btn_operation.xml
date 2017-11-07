@@ -3,15 +3,14 @@
     android:enterFadeDuration="300"
     android:exitFadeDuration="300">
 
-    <!--todo check colors-->
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <solid android:color="#A1A2A2"/>
+            <solid android:color="@color/dim_violet"/>
         </shape>
     </item>
     <item >
         <shape android:shape="rectangle">
-            <solid android:color="#1D2225"/>
+            <solid android:color="@color/violet"/>
         </shape>
     </item>
 </selector>
