@@ -1,18 +1,19 @@
 package com.epam.androidtraining;
 
+import android.support.annotation.WorkerThread;
+
 import com.epam.androidtraining.http.HttpClient;
 import com.epam.training.backend.calculator.domain.*;
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.stream.JsonReader;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class BackendCalculator implements ICalculator {
+
     @Override
     public String add(final int... values) {
-        final String url = new CalcApi(BuildConfig.BASE_CALC_URL).calculateSum(values[0], values[1]);
+        final String url = new CalcApi(BuildConfig.BASE_CALC_URL).getEvaluateSumUrl(values[0], values[1]);
         final MyResponseListener listener = new MyResponseListener();
         new HttpClient().request(url, listener);
         return String.valueOf(listener.getResult().getSum());
@@ -24,8 +25,9 @@ public class BackendCalculator implements ICalculator {
     }
 
     @Override
+    @WorkerThread
     public String evaluate(final String value) {
-        final String url = new CalcApi(BuildConfig.BASE_CALC_URL).evaluate(value);
+        final String url = new CalcApi(BuildConfig.BASE_CALC_URL).getEvaluateUrl(value);
         final MyResponseListener listener = new MyResponseListener();
         new HttpClient().request(url, listener);
         if (listener.getThrowable() != null) {

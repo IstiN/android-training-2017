@@ -8,8 +8,10 @@ package com.epam.training.backend.calculator;
 
 import com.epam.training.backend.calculator.domain.Result;
 import com.google.gson.Gson;
+import com.udojava.evalex.Expression;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,11 +26,8 @@ public class CalculatorServlet extends HttpServlet {
         final Result result = new Result();
         try {
             final String input = pRequest.getParameter("input");
-            final String[] numbers = input.split("\\+");
-            final int firstNumber = Integer.parseInt(numbers[0]);
-            final int secondNumber = Integer.parseInt(numbers[1]);
-            final int sum = firstNumber + secondNumber;
-            result.setSum(sum);
+            BigDecimal value = new Expression(input).eval();
+            result.setSum(value.toString());
         } catch (final Exception e) {
             result.setError(e.toString());
         }

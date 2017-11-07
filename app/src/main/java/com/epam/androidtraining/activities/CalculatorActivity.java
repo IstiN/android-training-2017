@@ -7,10 +7,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.epam.androidtraining.R;
+import com.epam.androidtraining.calculator.CalculationManager;
+import com.epam.androidtraining.calculator.CalculationManager.CalculationResultListener;
 
 public class CalculatorActivity extends AppCompatActivity {
 
     private TextView mExpressionView;
+    private TextView mResultView;
 
     @Override
     protected void onCreate(@Nullable Bundle pSavedInstanceState) {
@@ -18,6 +21,8 @@ public class CalculatorActivity extends AppCompatActivity {
         setContentView(R.layout.calculactor_linear);
 
         mExpressionView = findViewById(R.id.expression_text);
+        mResultView = findViewById(R.id.result_text);
+
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,19 +48,48 @@ public class CalculatorActivity extends AppCompatActivity {
         findViewById(R.id.btn_clear).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mExpressionView.setText("");
+                handleClearEvent();
             }
         });
         findViewById(R.id.btn_del).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CharSequence text = mExpressionView.getText();
-                if (text.length() > 0) {
-                    mExpressionView.setText(text.subSequence(0, text.length() - 1));
-                }
+                handleDeleteEvent();
+            }
+        });
+        findViewById(R.id.btn_equals).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleEqualsEvent();
             }
         });
 
+    }
+
+    private void handleEqualsEvent() {
+        String input = mExpressionView.getText().toString();
+        CalculationManager.getInstance().calculate(input, new CalculationResultListener() {
+            @Override
+            public void onSuccess(String result) {
+                mResultView.setText(result);
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+
+            }
+        });
+    }
+
+    private void handleClearEvent() {
+        mExpressionView.setText("");
+    }
+
+    private void handleDeleteEvent() {
+        CharSequence text = mExpressionView.getText();
+        if (text.length() > 0) {
+            mExpressionView.setText(text.subSequence(0, text.length() - 1));
+        }
     }
 
 }

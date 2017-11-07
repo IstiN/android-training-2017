@@ -5,16 +5,16 @@ import com.google.gson.annotations.SerializedName;
 public class Result {
 
     @SerializedName("s")
-    private Integer sum;
+    private String sum;
 
     @SerializedName("e")
     private String error;
 
-    public int getSum() {
+    public String getSum() {
         return sum;
     }
 
-    public void setSum(final int pSum) {
+    public void setSum(final String pSum) {
         sum = pSum;
     }
 
