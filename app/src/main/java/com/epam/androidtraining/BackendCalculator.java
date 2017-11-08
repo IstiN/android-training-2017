@@ -3,11 +3,13 @@ package com.epam.androidtraining;
 import android.support.annotation.WorkerThread;
 
 import com.epam.androidtraining.http.HttpClient;
+import com.epam.androidtraining.loaders.CalculateAsyncTask;
 import com.epam.training.backend.calculator.domain.*;
 import com.google.gson.GsonBuilder;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.concurrent.ExecutionException;
 
 public class BackendCalculator implements ICalculator {
 
@@ -25,19 +27,23 @@ public class BackendCalculator implements ICalculator {
     }
 
     @Override
-    @WorkerThread
+    //@WorkerThread
     public String evaluate(final String value) {
         final String url = new CalcApi(BuildConfig.BASE_CALC_URL).getEvaluateUrl(value);
         final MyResponseListener listener = new MyResponseListener();
-        new HttpClient().request(url, listener);
+      /*  new HttpClient().request(url, listener);
         if (listener.getThrowable() != null) {
             //TODO implement error handling on UI
             throw new UnsupportedOperationException(listener.getThrowable());
-        }
-        return String.valueOf(listener.getResult().getSum());
+        }*/
+
+        CalculateAsyncTask task = new CalculateAsyncTask(listener);
+        task.execute(url);
+        //return String.valueOf(listener.getResult().getSum());
+        return null;
     }
 
-    private static class MyResponseListener implements HttpClient.ResponseListener {
+    public static class MyResponseListener implements HttpClient.ResponseListener {
 
         private Result result;
         private Throwable mThrowable;
