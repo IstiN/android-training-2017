@@ -22,6 +22,13 @@
             android:textSize="32sp"
             tools:text="59.1485981" />
 
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminateOnly="true"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+
         <TextView
             android:id="@+id/expression_text"
             style="@style/TextAppearance.InputField"

@@ -28,9 +28,9 @@ public class CalculateAsyncTask extends AsyncTask<String, AsyncTask.Status, Resu
     @Override
     protected Result doInBackground(String... var1) {
         Log.i(TAG, "doInBackground");
-
+        final BackendCalculator.MyResponseListener listener = new BackendCalculator.MyResponseListener();
         try {
-            new HttpClient().request(var1[0], mResponseListener);
+            new HttpClient().request(var1[0], listener);
             return mResponseListener.getResult();
         } catch (Exception e) {
             mCalculatorListener.onError(e);

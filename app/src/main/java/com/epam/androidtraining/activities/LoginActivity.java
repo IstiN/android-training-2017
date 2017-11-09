@@ -59,11 +59,11 @@ public class LoginActivity extends Activity implements LoaderManager.LoaderCallb
 
         LoaderManager loaderManager = getLoaderManager();
         loaderManager.initLoader(FIRST_LOADER, null, this);
-        loaderManager.initLoader(SECOND_LOADER, null, this);
+       loaderManager.initLoader(SECOND_LOADER, null, this);
 
         runOnUiThread(mRunnable);
 
-        
+
     }
 
     @Override

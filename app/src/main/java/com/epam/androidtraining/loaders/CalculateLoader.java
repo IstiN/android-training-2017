@@ -21,7 +21,7 @@ public class CalculateLoader extends Loader<Result> {
 
     @Override
     protected void onStartLoading(){
-        mListener.onStart();
+//        mListener.onStart();
     }
 
     @Override

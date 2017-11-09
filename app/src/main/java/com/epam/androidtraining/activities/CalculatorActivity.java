@@ -14,6 +14,7 @@ public class CalculatorActivity extends AppCompatActivity {
 
     private TextView mExpressionView;
     private TextView mResultView;
+    private View mProgressView;
 
     @Override
     protected void onCreate(@Nullable Bundle pSavedInstanceState) {
@@ -22,6 +23,8 @@ public class CalculatorActivity extends AppCompatActivity {
 
         mExpressionView = findViewById(R.id.expression_text);
         mResultView = findViewById(R.id.result_text);
+        mProgressView = findViewById(R.id.progress_bar);
+        mProgressView.setVisibility(View.INVISIBLE);
 
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
@@ -67,18 +70,24 @@ public class CalculatorActivity extends AppCompatActivity {
     }
 
     private void handleEqualsEvent() {
+        mProgressView.setVisibility(View.VISIBLE);
         String input = mExpressionView.getText().toString();
         CalculationManager.getInstance().calculate(input, new CalculationResultListener() {
             @Override
-            public void onSuccess(String result) {
-                mResultView.setText(result);
+            public void onSuccess(final String result) {
+                setResult(result);
             }
 
             @Override
-            public void onError(Throwable throwable) {
-
+            public void onError(final Throwable throwable) {
+                setResult(throwable.getMessage());
             }
         });
+    }
+
+    private void setResult(final String result) {
+        mProgressView.setVisibility(View.INVISIBLE);
+        mResultView.setText(result);
     }
 
     private void handleClearEvent() {

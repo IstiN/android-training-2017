@@ -13,6 +13,13 @@
         android:padding="16dp"
         tools:text="59÷12" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminateOnly="true"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+
     <TextView
         android:id="@+id/result_text"
         style="@style/TextAppearance.InputField"

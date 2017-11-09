@@ -1,9 +1,11 @@
 package com.epam.androidtraining;
 
 import android.support.annotation.WorkerThread;
+import android.util.Log;
 
 import com.epam.androidtraining.http.HttpClient;
 import com.epam.androidtraining.loaders.CalculateAsyncTask;
+import com.epam.androidtraining.loaders.ICalculatorListener;
 import com.epam.training.backend.calculator.domain.*;
 import com.google.gson.GsonBuilder;
 
@@ -27,23 +29,25 @@ public class BackendCalculator implements ICalculator {
     }
 
     @Override
-    //@WorkerThread
+    @WorkerThread
     public String evaluate(final String value) {
         final String url = new CalcApi(BuildConfig.BASE_CALC_URL).getEvaluateUrl(value);
         final MyResponseListener listener = new MyResponseListener();
-      /*  new HttpClient().request(url, listener);
+        new HttpClient().request(url, listener);
         if (listener.getThrowable() != null) {
             //TODO implement error handling on UI
-            throw new UnsupportedOperationException(listener.getThrowable());
-        }*/
-
-        CalculateAsyncTask task = new CalculateAsyncTask(listener);
-        task.execute(url);
-        //return String.valueOf(listener.getResult().getSum());
-        return null;
+            throw new RuntimeException(listener.getThrowable());
+        }
+        Result result = listener.getResult();
+        if (result.getError()!=null){
+            return result.getError();
+        } else {
+            return result.getSum();
+        }
     }
 
     public static class MyResponseListener implements HttpClient.ResponseListener {
+        private static final String TAG = "MyResponseListener";
 
         private Result result;
         private Throwable mThrowable;
@@ -56,11 +60,15 @@ public class BackendCalculator implements ICalculator {
                 result = new GsonBuilder()
                         .setLenient()
                         .create().fromJson(inputStreamReader, Result.class);
+            }catch (Exception e) {
+                Log.d(TAG, "onResponse() called with: pInputStream = [" + pInputStream + "]");
+                mThrowable = e;
             } finally {
                 if (inputStreamReader != null) {
                     try {
                         inputStreamReader.close();
-                    } catch (final Exception ignored) {}
+                    } catch (final Exception ignored) {
+                    }
                 }
             }
         }

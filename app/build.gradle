@@ -16,7 +16,7 @@ android {
     buildTypes {
         debug {
 //            buildConfigField "String", "BASE_CALC_URL", "\"https://debugcalculator.appspot.com\""
-            buildConfigField "String", "BASE_CALC_URL", '"http://10.0.3.2:8080"'
+            buildConfigField "String", "BASE_CALC_URL", '"http://10.0.2.2:8081"'
 
         }
         release {
