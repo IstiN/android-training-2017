@@ -10,31 +10,37 @@ import com.epam.training.backend.calculator.domain.Result;
 public class CalculateAsyncTask extends AsyncTask<String, AsyncTask.Status, Result> {
 
     private static final String TAG = CalculateAsyncTask.class.getSimpleName();
-    private BackendCalculator.MyResponseListener myResponseListener;
+    private ICalculatorListener<Result> mCalculatorListener;
+    private BackendCalculator.MyResponseListener mResponseListener;
 
-    public CalculateAsyncTask(BackendCalculator.MyResponseListener listener){
+    public CalculateAsyncTask(BackendCalculator.MyResponseListener responseListener, ICalculatorListener<Result> listener){
         super();
-        myResponseListener = listener;
+
+        mCalculatorListener = listener;
+        mResponseListener = responseListener;
     }
 
     protected void onPreExecute() {
         Log.i(TAG, "onPreExecute");
+        mCalculatorListener.onStart();
     }
 
     @Override
     protected Result doInBackground(String... var1) {
         Log.i(TAG, "doInBackground");
-        new HttpClient().request(var1[0], myResponseListener);
-        return myResponseListener.getResult();
+
+        try {
+            new HttpClient().request(var1[0], mResponseListener);
+            return mResponseListener.getResult();
+        } catch (Exception e) {
+            mCalculatorListener.onError(e);
+            return null;
+        }
     }
 
     @Override
     protected void onPostExecute(Result result) {
-        if (result != null) {
-            Log.i(TAG, "onPostExecute" + String.valueOf(result.getSum()));
-
-            Log.i(TAG, "onPostExecute" + String.valueOf(result.getError()));
-        }
+        mCalculatorListener.onSuccess(result);
     }
 
     @Override

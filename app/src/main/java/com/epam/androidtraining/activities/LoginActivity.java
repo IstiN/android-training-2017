@@ -28,6 +28,12 @@ public class LoginActivity extends Activity implements LoaderManager.LoaderCallb
 
     private EditText mEditTextView;
     private String savedString = Constants.EMPTY_STRING;
+    private Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+
+        }
+    };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +60,10 @@ public class LoginActivity extends Activity implements LoaderManager.LoaderCallb
         LoaderManager loaderManager = getLoaderManager();
         loaderManager.initLoader(FIRST_LOADER, null, this);
         loaderManager.initLoader(SECOND_LOADER, null, this);
+
+        runOnUiThread(mRunnable);
+
+        
     }
 
     @Override
@@ -113,5 +123,9 @@ public class LoginActivity extends Activity implements LoaderManager.LoaderCallb
     @Override
     public void onLoaderReset(Loader<Result> loader) {
 
+    }
+
+    private void getSomthing(){
+        new Thread(mRunnable).run();
     }
 }
