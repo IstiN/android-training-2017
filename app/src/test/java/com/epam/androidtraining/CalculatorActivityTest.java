@@ -12,7 +12,7 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(
@@ -40,8 +40,8 @@ public class CalculatorActivityTest {
 
         CalculatorActivity calculatorActivity = activityController.get();
         boolean isCalculateButtonEnabled = calculatorActivity.findViewById(R.id.calculate_button).isEnabled();
-        assertEquals(isCalculateButtonEnabled, false);
-        assertFalse(isCalculateButtonEnabled);
+        assertEquals(isCalculateButtonEnabled, true);
+        assertTrue(isCalculateButtonEnabled);
 
         //TODO add additional checks
     }
