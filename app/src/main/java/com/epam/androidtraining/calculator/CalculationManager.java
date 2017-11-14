@@ -1,30 +1,24 @@
 package com.epam.androidtraining.calculator;
 
 
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.epam.androidtraining.BackendCalculator;
 import com.epam.androidtraining.ICalculator;
-import com.epam.androidtraining.loaders.CalculateAsyncTask;
-import com.epam.androidtraining.loaders.ICalculatorListener;
-import com.epam.training.backend.calculator.domain.Result;
+import com.epam.androidtraining.loaders.CalculatorAsyncTask;
 
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class CalculationManager {
     private static CalculationManager sInstance;
-    private final ICalculator calculator;
+    private final ICalculator mCalculator;
     private final Handler uiHandler = new Handler(Looper.getMainLooper());
-    private ExecutorService executorService = Executors.newSingleThreadExecutor();
+    private ExecutorService mExecutorService = Executors.newSingleThreadExecutor();
 
     private CalculationManager() {
-        calculator = new BackendCalculator();
+        mCalculator = new BackendCalculator();
     }
 
     public static CalculationManager getInstance() {
@@ -51,7 +45,7 @@ public class CalculationManager {
                 //work in background
                 String result = null;
                 try {
-                    result = calculator.evaluate(input);
+                    result = mCalculator.evaluate(input);
                 } catch (Exception e) {
                     publishError(e, resultListener);
                 }
@@ -59,7 +53,7 @@ public class CalculationManager {
 
             }
         };
-        executorService.execute(runnable);
+        mExecutorService.execute(runnable);
     }
 
     private void loadWithThread(final String input, final CalculationResultListener resultListener) {
@@ -69,7 +63,7 @@ public class CalculationManager {
                 //work in background
                 String result = null;
                 try {
-                    result = calculator.evaluate(input);
+                    result = mCalculator.evaluate(input);
                 } catch (Exception e) {
                     publishError(e, resultListener);
                 }
@@ -80,41 +74,16 @@ public class CalculationManager {
     }
 
     private void loadWithAsyncTask(String input, final CalculationResultListener resultListener) {
-        new AsyncTask<String, Void, String>() {
-
-            protected void onPreExecute() {
-
-            }
-
-
-            @Override
-            protected String doInBackground(String... strings) {
-                try {
-                    return calculator.evaluate(strings[0]);
-                } catch (Exception e) {
-                    publishError(e, resultListener);
-                    return null;
-                }
-
-            }
-
-            @Override
-            protected void onPostExecute(String result) {
-                if (result != null) {
-                    publishResult(result, resultListener);
-                }
-            }
-        }.executeOnExecutor(Executors.newFixedThreadPool(5), input);
+        new CalculatorAsyncTask(mCalculator, resultListener).executeOnExecutor(mExecutorService, input);
     }
 
     private void publishResult(final String result, final CalculationResultListener resultListener) {
-       uiHandler.postDelayed(new Runnable() {
+        uiHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 resultListener.onSuccess(result);
             }
-        }, 2000);
-      //  resultListener.onSuccess(result);
+        }, 2000);//delay is only for demonstration
     }
 
     private void publishError(final Exception e, final CalculationResultListener resultListener) {
@@ -132,4 +101,5 @@ public class CalculationManager {
 
         void onError(Throwable throwable);
     }
+
 }

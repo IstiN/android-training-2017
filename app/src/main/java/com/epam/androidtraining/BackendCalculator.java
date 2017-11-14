@@ -4,14 +4,11 @@ import android.support.annotation.WorkerThread;
 import android.util.Log;
 
 import com.epam.androidtraining.http.HttpClient;
-import com.epam.androidtraining.loaders.CalculateAsyncTask;
-import com.epam.androidtraining.loaders.ICalculatorListener;
 import com.epam.training.backend.calculator.domain.*;
 import com.google.gson.GsonBuilder;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.concurrent.ExecutionException;
 
 public class BackendCalculator implements ICalculator {
 

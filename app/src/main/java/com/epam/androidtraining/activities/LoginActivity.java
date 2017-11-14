@@ -1,9 +1,7 @@
 package com.epam.androidtraining.activities;
 
 import android.app.Activity;
-import android.app.LoaderManager;
 import android.content.Intent;
-import android.content.Loader;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -12,14 +10,12 @@ import android.widget.EditText;
 
 import com.epam.androidtraining.Constants;
 import com.epam.androidtraining.R;
-import com.epam.androidtraining.loaders.CalculateLoader;
-import com.epam.training.backend.calculator.domain.Result;
 
 /**
  * Created by evgen on 23.10.2017.
  */
 
-public class LoginActivity extends Activity implements LoaderManager.LoaderCallbacks<Result> {
+public class LoginActivity extends Activity {
 
     public static final String TAG = LoginActivity.class.getSimpleName();
     public static final String SAVED_DATA = "saved_data";
@@ -56,10 +52,6 @@ public class LoginActivity extends Activity implements LoaderManager.LoaderCallb
         });
 
         mEditTextView = findViewById(R.id.input_field_edit_text);
-
-        LoaderManager loaderManager = getLoaderManager();
-        loaderManager.initLoader(FIRST_LOADER, null, this);
-       loaderManager.initLoader(SECOND_LOADER, null, this);
 
         runOnUiThread(mRunnable);
 
@@ -106,22 +98,6 @@ public class LoginActivity extends Activity implements LoaderManager.LoaderCallb
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         savedString = savedInstanceState.getString(SAVED_DATA);
         super.onRestoreInstanceState(savedInstanceState);
-
-    }
-
-    @Override
-    public Loader<Result> onCreateLoader(int id, Bundle args) {
-        return new CalculateLoader(this);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Result> loader, Result data) {
-        data.getSum();
-        data.getError();
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Result> loader) {
 
     }
 
