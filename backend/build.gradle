@@ -23,11 +23,11 @@ targetCompatibility = JavaVersion.VERSION_1_7
 
 dependencies {
     appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.42'
-    compile 'com.google.api-client:google-api-client:1.23.0'
-    compile 'com.google.appengine:appengine-endpoints:1.9.42'
-    compile 'com.google.appengine:appengine-endpoints-deps:1.9.42'
-    compile 'com.googlecode.objectify:objectify:5.1.9'
-    compile 'javax.servlet:servlet-api:2.5'
+    implementation 'com.google.api-client:google-api-client:1.23.0'
+    implementation 'com.google.appengine:appengine-endpoints:1.9.42'
+    implementation 'com.google.appengine:appengine-endpoints-deps:1.9.42'
+    implementation 'com.googlecode.objectify:objectify:5.1.9'
+    implementation 'javax.servlet:servlet-api:2.5'
 }
 
 appengine {

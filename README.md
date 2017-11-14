@@ -16,6 +16,22 @@ Project requirements:
 6. Flavors
 
 *********************************************************
+Link to common issues comment https://github.com/IstiN/android-training-2017/issues/154#issuecomment-344004988 
+
+*********************************************************
+
+*********************************************************
+#HW: 09.11.2017 - deadline (19.11.2017 23.59)
+
+1. Implement threading in your own project (ex. load data feed)
+
+or
+ 
+  Create screen with text label and 3 buttons (Thread, AsyncTask, ExecutorService) and update label with value returned appropriate background worker.
+
+*********************************************************
+
+*********************************************************
 #HW: 30.10.2017 - deadline (10.11.2017 23.59)
 
 1. Layout your own 2 screens or Tweeter or Instagram main page
