@@ -61,7 +61,6 @@ dependencies {
     }
     compile 'com.squareup.okhttp3:okhttp:3.7.0'
     compile 'com.google.code.gson:gson:2.8.2'
-    compile "com.android.support:design:${versions.support}"
 
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
