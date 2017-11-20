@@ -20,7 +20,7 @@
 
         </activity>
         <activity android:name=".activities.LoginActivity"/>
-        <activity android:name=".activities.GridViewActivity">
+        <activity android:name=".activities.RecyclerViewSampleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

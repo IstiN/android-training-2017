@@ -15,6 +15,7 @@ import java.util.List;
 public class ViewPagerSampleActivity extends AppCompatActivity {
 
     private List<MessageModel> mMessageList;
+    private int COUNT_PAGES = 5;
 
     @Override
     protected void onCreate(@Nullable final Bundle pSavedInstanceState) {

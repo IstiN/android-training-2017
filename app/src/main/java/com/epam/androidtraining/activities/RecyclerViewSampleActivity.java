@@ -3,8 +3,10 @@ package com.epam.androidtraining.activities;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.epam.androidtraining.R;
 import com.epam.androidtraining.adapter.MessageRecyclerAdapter;
@@ -26,8 +28,7 @@ public class RecyclerViewSampleActivity extends AppCompatActivity {
 
         final RecyclerView mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(false);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setAdapter(new MessageRecyclerAdapter(mMessageList));
     }
 

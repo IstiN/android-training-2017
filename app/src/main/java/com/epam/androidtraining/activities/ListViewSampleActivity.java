@@ -45,6 +45,5 @@ public class ListViewSampleActivity extends AppCompatActivity {
         mMessageList.add(new MessageModel("Hello, List View", "maxcriser", "16.01.1998"));
         mMessageList.add(new MessageModel("Hello, List View", "maxcriser", "16.01.1998"));
         mMessageList.add(new MessageModel("Hello, List View", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, List View", "maxcriser", "16.01.1998"));
     }
 }

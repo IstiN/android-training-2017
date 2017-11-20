@@ -32,7 +32,20 @@ public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecycler
 
     @Override
     public MessageRecyclerViewHolder onCreateViewHolder(final ViewGroup pParent, final int pViewType) {
-        final View view = LayoutInflater.from(pParent.getContext()).inflate(R.layout.adapter_message, pParent, false);
+        final int viewId;
+
+        switch (pViewType) {
+            case MessageType.VIP:
+                viewId = R.layout.adapter_message_vip;
+                break;
+            case MessageType.USER:
+                viewId = R.layout.adapter_message;
+                break;
+            default:
+                viewId = R.layout.adapter_message;
+                break;
+        }
+        final View view = LayoutInflater.from(pParent.getContext()).inflate(viewId, pParent, false);
 
         return new MessageRecyclerViewHolder(view);
     }
@@ -41,14 +54,18 @@ public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecycler
     public void onBindViewHolder(final MessageRecyclerViewHolder pHolder, final int pPosition) {
         final MessageModel messageModel = mMessageList.get(pPosition);
 
-        pHolder.mSender.setText(messageModel.getSender());
+        pHolder.mSender.setText(pPosition + " " + messageModel.getSender());
         pHolder.mDate.setText(messageModel.getDate());
         pHolder.mMessage.setText(messageModel.getMessage());
     }
 
     @Override
     public int getItemViewType(final int pPosition) {
-        return super.getItemViewType(pPosition);
+        if (pPosition == 0) {
+            return MessageType.VIP;
+        } else {
+            return MessageType.USER;
+        }
     }
 
     @Override
