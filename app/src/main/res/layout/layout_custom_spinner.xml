@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.epam.androidtraining.view.CustomSpinner
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:maxWidth="200dp">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textSize="14sp"
+        tools:ignore="DuplicateIds,MissingPrefix"
+        tools:text="Simple"/>
+
+</com.epam.androidtraining.view.CustomSpinner>
