@@ -15,7 +15,7 @@
         <activity android:name=".activities.MainActivity">
 
         </activity>
-        <activity android:name=".activities.CalculatorActivity"
+        <activity android:name=".activities.ViewPagerSampleActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
