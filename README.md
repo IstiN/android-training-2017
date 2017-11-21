@@ -23,10 +23,13 @@ Link to common issues comment https://github.com/IstiN/android-training-2017/iss
 *********************************************************
 #HW: 20.11.2017 - deadline (30.11.2017 23.59)
 
-1. RecyclerView (use GridLayoutManager, LinearLayoutManager) + (notify data set changed)+ (ItemDecoration*)
+1. RecyclerView (use GridLayoutManager, LinearLayoutManager) + (notify data set changed)+ ((optional) ItemDecoration)
+
 2. Try to use GridView + ListView + Spinner + ViewPager
-*3. Pagination (RecyclerView)*
-4*. Drap and Drop or Swipe to Remove
+
+3. Pagination (RecyclerView)
+
+4.*(optional) Drap and Drop or Swipe to Remove
 
 #HW: 09.11.2017 - deadline (19.11.2017 23.59)
 
