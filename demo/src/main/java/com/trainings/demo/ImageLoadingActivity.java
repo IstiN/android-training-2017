@@ -29,7 +29,8 @@ public class ImageLoadingActivity extends AppCompatActivity {
         findViewById(R.id.btn_reload).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Malevich.INSTANCE.load(getUrl(widthBar.getProgress(), heightBar.getProgress())).into(imageView);
+                String url = getUrl(widthBar.getProgress(), heightBar.getProgress());
+                Malevich.INSTANCE.load(url).into(imageView);
             }
         });
     }

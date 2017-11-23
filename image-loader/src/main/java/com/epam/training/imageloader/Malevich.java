@@ -36,7 +36,7 @@ public enum Malevich {
             @Override
             protected int sizeOf(final String key, final Bitmap value) {
                 return key.length() + value.getByteCount();
-            }
+        }
 
         };
     }
@@ -44,6 +44,7 @@ public enum Malevich {
     public ImageRequest.Builder load(String url) {
         return new ImageRequest.Builder(this).load(url);
     }
+
     private int getCacheSize() {
         return Math.min((int) (Runtime.getRuntime().maxMemory() / 4), MAX_MEMORY_FOR_IMAGES);
     }
@@ -52,36 +53,43 @@ public enum Malevich {
     private void dispatchLoading() {
 
         new AsyncTask<Void, Void, ImageResult>() {
+
             @Override
             protected ImageResult doInBackground(Void... voids) {
 
-                ImageRequest request = queue.getFirst();
-                ImageResult result = new ImageResult(request);
-
-                synchronized (lock) {
-                    final Bitmap bitmap = lruCache.get(request.url);
-                    if (bitmap != null) {
-                        result.setBitmap(bitmap);
-                        return result;
-                    }
-                }
+                ImageResult result = null;
 
                 try {
+
+                    ImageRequest request = queue.takeFirst();
+
+                    result = new ImageResult(request);
+
+                    synchronized (lock) {
+                        final Bitmap bitmap = lruCache.get(request.url);
+                        if (bitmap != null) {
+                            result.setBitmap(bitmap);
+                            return result;
+                        }
+                    }
+
                     InputStream inputStream = new HttpStreamProvider().get(request.url);
 
-                    Bitmap bitmap = getScaleBitmap(inputStream, request.height, request.width);
+                    Bitmap bitmap = getScaledBitmap(inputStream, request.height, request.width);
 
                     if (bitmap != null) {
                         result.setBitmap(bitmap);
                         synchronized (lock) {
-//                            lruCache.put(request.url, bitmap);
+                            lruCache.put(request.url, bitmap);
                         }
                     } else throw new IllegalStateException("Bitmap is null");
 
                     return result;
                 } catch (Exception e) {
                     Log.e(TAG, "doInBackground: ", e);
-                    result.setException(e);
+                    if (result != null) {
+                        result.setException(e);
+                    }
                     return result;
                 }
             }
@@ -95,13 +103,14 @@ public enum Malevich {
     }
 
     private void processImageResult(ImageResult imageResult) {
-        // TODO: 22-Nov-17
-        ImageRequest request = imageResult.getRequest();
-        ImageView imageView = request.target.get();
-        if (imageView != null) {
-            Object tag = imageView.getTag();
-            if (tag != null && tag.equals(request.url)) {
-                imageView.setImageBitmap(imageResult.getBitmap());
+        if (imageResult != null) {
+            ImageRequest request = imageResult.getRequest();
+            ImageView imageView = request.target.get();
+            if (imageView != null) {
+                Object tag = imageView.getTag();
+                if (tag != null && tag.equals(request.url)) {
+                    imageView.setImageBitmap(imageResult.getBitmap());
+                }
             }
         }
     }
@@ -112,6 +121,7 @@ public enum Malevich {
         if (imageView == null) return;
 
         imageView.setImageBitmap(null);
+
         if (imageHasSize(request)) {
             imageView.setTag(request.url);
             queue.addFirst(request);
@@ -158,10 +168,11 @@ public enum Malevich {
         return false;
     }
 
-    private Bitmap getScaleBitmap(InputStream inputStream, int w, int h) throws IOException {
+    private Bitmap getScaledBitmap(InputStream inputStream, int w, int h) throws IOException {
 
         // First decode with inJustDecodeBounds=true to check dimensions
         final BitmapFactory.Options options = new BitmapFactory.Options();
+
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(inputStream.available());
         byte[] chunk = new byte[1 << 16];
         int bytesRead;
