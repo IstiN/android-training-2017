@@ -30,20 +30,5 @@ public class ListViewSampleActivity extends AppCompatActivity {
     private void loadData() {
         mMessageList = new ArrayList<>();
 
-        mMessageList.add(new MessageModel("Hello, List View", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, List View", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, List View", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, List View", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, List View", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, List View", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, List View", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, List View", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, List View", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, List View", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, List View", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, List View", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, List View", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, List View", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, List View", "maxcriser", "16.01.1998"));
     }
 }

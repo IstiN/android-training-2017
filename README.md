@@ -21,6 +21,13 @@ Link to common issues comment https://github.com/IstiN/android-training-2017/iss
 *********************************************************
 
 *********************************************************
+#HW: 23.11.2017 - deadline (3.12.2017 23.59)
+
+Write own image loader, fix sample size calculation.
+
+*********************************************************
+
+*********************************************************
 #HW: 20.11.2017 - deadline (30.11.2017 23.59)
 
 1. RecyclerView (use GridLayoutManager, LinearLayoutManager) + (notify data set changed)+ ((optional) ItemDecoration)

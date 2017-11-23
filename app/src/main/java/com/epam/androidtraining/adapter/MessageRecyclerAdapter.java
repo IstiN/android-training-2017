@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.epam.androidtraining.R;
 import com.epam.androidtraining.holder.MessageRecyclerViewHolder;
 import com.epam.androidtraining.model.MessageModel;
+import com.epam.training.imageloader.Malevich;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -57,6 +58,7 @@ public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecycler
         pHolder.mSender.setText(pPosition + " " + messageModel.getSender());
         pHolder.mDate.setText(messageModel.getDate());
         pHolder.mMessage.setText(messageModel.getMessage());
+        Malevich.INSTANCE.load(messageModel.getUrl()).into(pHolder.mImageView);
     }
 
     @Override

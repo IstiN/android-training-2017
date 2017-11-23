@@ -46,6 +46,7 @@ android {
 dependencies {
     compile project(':domain')
     compile project(':ui')
+    compile project(':image-loader')
     compile project(path: ':backend', configuration: 'android-endpoints')
 
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
