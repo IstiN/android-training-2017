@@ -1,18 +1,20 @@
 package com.epam.androidtraining;
 
+import android.support.annotation.WorkerThread;
+import android.util.Log;
+
 import com.epam.androidtraining.http.HttpClient;
 import com.epam.training.backend.calculator.domain.*;
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.stream.JsonReader;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class BackendCalculator implements ICalculator {
+
     @Override
     public String add(final int... values) {
-        final String url = new CalcApi(BuildConfig.BASE_CALC_URL).calculateSum(values[0], values[1]);
+        final String url = new CalcApi(BuildConfig.BASE_CALC_URL).getEvaluateSumUrl(values[0], values[1]);
         final MyResponseListener listener = new MyResponseListener();
         new HttpClient().request(url, listener);
         return String.valueOf(listener.getResult().getSum());
@@ -24,18 +26,25 @@ public class BackendCalculator implements ICalculator {
     }
 
     @Override
+    @WorkerThread
     public String evaluate(final String value) {
-        final String url = new CalcApi(BuildConfig.BASE_CALC_URL).evaluate(value);
+        final String url = new CalcApi(BuildConfig.BASE_CALC_URL).getEvaluateUrl(value);
         final MyResponseListener listener = new MyResponseListener();
         new HttpClient().request(url, listener);
         if (listener.getThrowable() != null) {
             //TODO implement error handling on UI
-            throw new UnsupportedOperationException(listener.getThrowable());
+            throw new RuntimeException(listener.getThrowable());
         }
-        return String.valueOf(listener.getResult().getSum());
+        Result result = listener.getResult();
+        if (result.getError()!=null){
+            return result.getError();
+        } else {
+            return result.getSum();
+        }
     }
 
-    private static class MyResponseListener implements HttpClient.ResponseListener {
+    public static class MyResponseListener implements HttpClient.ResponseListener {
+        private static final String TAG = "MyResponseListener";
 
         private Result result;
         private Throwable mThrowable;
@@ -48,11 +57,15 @@ public class BackendCalculator implements ICalculator {
                 result = new GsonBuilder()
                         .setLenient()
                         .create().fromJson(inputStreamReader, Result.class);
+            }catch (Exception e) {
+                Log.d(TAG, "onResponse() called with: pInputStream = [" + pInputStream + "]");
+                mThrowable = e;
             } finally {
                 if (inputStreamReader != null) {
                     try {
                         inputStreamReader.close();
-                    } catch (final Exception ignored) {}
+                    } catch (final Exception ignored) {
+                    }
                 }
             }
         }

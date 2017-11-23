@@ -1,5 +1,7 @@
 package com.epam.androidtraining;
 
+import com.epam.androidtraining.loaders.ICalculatorListener;
+
 public class Calculator implements ICalculator {
 
     @Override

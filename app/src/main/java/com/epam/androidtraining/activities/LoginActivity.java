@@ -19,9 +19,17 @@ public class LoginActivity extends Activity {
 
     public static final String TAG = LoginActivity.class.getSimpleName();
     public static final String SAVED_DATA = "saved_data";
+    public static final int FIRST_LOADER = 0;
+    public static final int SECOND_LOADER = 1;
 
     private EditText mEditTextView;
     private String savedString = Constants.EMPTY_STRING;
+    private Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+
+        }
+    };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,6 +52,9 @@ public class LoginActivity extends Activity {
         });
 
         mEditTextView = findViewById(R.id.input_field_edit_text);
+
+        runOnUiThread(mRunnable);
+
 
     }
 
@@ -88,5 +99,9 @@ public class LoginActivity extends Activity {
         savedString = savedInstanceState.getString(SAVED_DATA);
         super.onRestoreInstanceState(savedInstanceState);
 
+    }
+
+    private void getSomthing(){
+        new Thread(mRunnable).run();
     }
 }

@@ -17,12 +17,12 @@ public class CalcApiTest {
 
     @Test
     public void calculateSum() throws Exception {
-        assertEquals(BASE_PATH + "/" + "calc?input=1%2B15", mCalcApi.calculateSum(1, 15));
+        assertEquals(BASE_PATH + "/" + "calc?input=1%2B15", mCalcApi.getEvaluateSumUrl(1, 15));
     }
 
     @Test
     public void evaluate() throws Exception {
-        assertEquals(BASE_PATH + "/" + "calc?input=I%27m+lucky", mCalcApi.evaluate("I'm lucky"));
+        assertEquals(BASE_PATH + "/" + "calc?input=I%27m+lucky", mCalcApi.getEvaluateUrl("I'm lucky"));
     }
 
 }

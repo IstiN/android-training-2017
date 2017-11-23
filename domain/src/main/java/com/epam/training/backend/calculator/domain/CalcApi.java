@@ -17,11 +17,11 @@ public class CalcApi {
         }
     }
 
-    public String calculateSum(final int a, final int b) {
-        return evaluate(a + "+" + b);
+    public String getEvaluateSumUrl(final int a, final int b) {
+        return getEvaluateUrl(a + "+" + b);
     }
 
-    public String evaluate(String input) {
+    public String getEvaluateUrl(String input) {
         try {
             return mBasePath + CALC + URLEncoder.encode(input, "UTF-8");
         } catch (final UnsupportedEncodingException pE) {

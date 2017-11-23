@@ -25,6 +25,7 @@ dependencies {
     appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.42'
     compile 'javax.servlet:servlet-api:2.5'
     compile project(':domain')
+    compile 'com.udojava:EvalEx:1.16'
 }
 
 appengine {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="divider_size">1dp</dimen>
-    <dimen name="calc_btn_heignt">88dp</dimen>
+    <dimen name="calc_btn_heignt">60dp</dimen>
 </resources>
