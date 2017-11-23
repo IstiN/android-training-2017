@@ -52,54 +52,7 @@ public enum Malevich {
     @SuppressLint("StaticFieldLeak")
     private void dispatchLoading() {
 
-        new AsyncTask<Void, Void, ImageResult>() {
-
-            @Override
-            protected ImageResult doInBackground(Void... voids) {
-
-                ImageResult result = null;
-
-                try {
-
-                    ImageRequest request = queue.takeFirst();
-
-                    result = new ImageResult(request);
-
-                    synchronized (lock) {
-                        final Bitmap bitmap = lruCache.get(request.url);
-                        if (bitmap != null) {
-                            result.setBitmap(bitmap);
-                            return result;
-                        }
-                    }
-
-                    InputStream inputStream = new HttpStreamProvider().get(request.url);
-
-                    Bitmap bitmap = getScaledBitmap(inputStream, request.height, request.width);
-
-                    if (bitmap != null) {
-                        result.setBitmap(bitmap);
-                        synchronized (lock) {
-                            lruCache.put(request.url, bitmap);
-                        }
-                    } else throw new IllegalStateException("Bitmap is null");
-
-                    return result;
-                } catch (Exception e) {
-                    Log.e(TAG, "doInBackground: ", e);
-                    if (result != null) {
-                        result.setException(e);
-                    }
-                    return result;
-                }
-            }
-
-            @Override
-            protected void onPostExecute(ImageResult imageResult) {
-                processImageResult(imageResult);
-            }
-
-        }.executeOnExecutor(executorService);
+        new ImageResultAsyncTask().executeOnExecutor(executorService);
     }
 
     private void processImageResult(ImageResult imageResult) {
@@ -218,4 +171,54 @@ public enum Malevich {
     }
 
     private static final String TAG = "Malevich";
+
+    private class ImageResultAsyncTask extends AsyncTask<Void, Void, ImageResult> {
+
+        @Override
+        protected ImageResult doInBackground(Void... voids) {
+
+            ImageResult result = null;
+
+            try {
+
+                ImageRequest request = queue.takeFirst();
+                Log.d(TAG, "doInBackground: "+request.url);
+
+                result = new ImageResult(request);
+
+                synchronized (lock) {
+                    final Bitmap bitmap = lruCache.get(request.url);
+                    if (bitmap != null) {
+                        result.setBitmap(bitmap);
+                        return result;
+                    }
+                }
+
+                InputStream inputStream = new HttpStreamProvider().get(request.url);
+
+                Bitmap bitmap = getScaledBitmap(inputStream, request.height, request.width);
+
+                if (bitmap != null) {
+                    result.setBitmap(bitmap);
+                    synchronized (lock) {
+                        lruCache.put(request.url, bitmap);
+                    }
+                } else throw new IllegalStateException("Bitmap is null");
+
+                return result;
+            } catch (Exception e) {
+                Log.e(TAG, "doInBackground: ", e);
+                if (result != null) {
+                    result.setException(e);
+                }
+                return result;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(ImageResult imageResult) {
+            processImageResult(imageResult);
+        }
+
+    }
 }

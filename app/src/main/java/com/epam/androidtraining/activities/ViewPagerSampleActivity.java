@@ -31,21 +31,5 @@ public class ViewPagerSampleActivity extends AppCompatActivity {
     private void loadData() {
         mMessageList = new ArrayList<>();
 
-        mMessageList.add(new MessageModel("Hello, View Pager", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, View Pager", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, View Pager", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, View Pager", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, View Pager", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, View Pager", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, View Pager", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, View Pager", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, View Pager", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, View Pager", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, View Pager", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, View Pager", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, View Pager", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, View Pager", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, View Pager", "maxcriser", "16.01.1998"));
-        mMessageList.add(new MessageModel("Hello, View Pager", "maxcriser", "16.01.1998"));
     }
 }

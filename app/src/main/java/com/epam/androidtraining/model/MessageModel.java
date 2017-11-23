@@ -7,11 +7,13 @@ public class MessageModel implements Serializable {
     private String mMessage;
     private String mSender;
     private String mDate;
+    private String mUrl;
 
-    public MessageModel(final String pMessage, final String pSender, final String pDate) {
+    public MessageModel(final String pMessage, final String pSender, final String pDate, String mUrl) {
         mMessage = pMessage;
         mSender = pSender;
         mDate = pDate;
+        this.mUrl = mUrl;
     }
 
     public String getMessage() {
@@ -24,5 +26,9 @@ public class MessageModel implements Serializable {
 
     public String getDate() {
         return mDate;
+    }
+
+    public String getUrl() {
+        return mUrl;
     }
 }
