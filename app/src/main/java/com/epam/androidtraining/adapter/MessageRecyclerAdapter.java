@@ -58,6 +58,7 @@ public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecycler
         pHolder.mSender.setText(pPosition + " " + messageModel.getSender());
         pHolder.mDate.setText(messageModel.getDate());
         pHolder.mMessage.setText(messageModel.getMessage());
+
         Malevich.INSTANCE.load(messageModel.getUrl()).into(pHolder.mImageView);
     }
 

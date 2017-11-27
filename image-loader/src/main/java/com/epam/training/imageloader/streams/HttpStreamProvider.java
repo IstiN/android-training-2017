@@ -1,4 +1,4 @@
-package com.epam.training.imageloader;
+package com.epam.training.imageloader.streams;
 
 
 import java.io.IOException;

@@ -15,7 +15,7 @@ import java.util.List;
 
 public class RecyclerViewSampleActivity extends AppCompatActivity {
 
-    public static final String URL_FORMAT = "http://lorempixel.com/100/100/sports/%s/";
+    public static final String URL_FORMAT = "http://lorempixel.com/200/200/cats/%s/";
 
     private List<MessageModel> mMessageList;
 
