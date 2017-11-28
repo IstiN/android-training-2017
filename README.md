@@ -20,6 +20,11 @@ Link to common issues comment https://github.com/IstiN/android-training-2017/iss
 
 *********************************************************
 
+#Review
+
+Kiolk: https://github.com/Kiolk/BullsAndCows/compare/review?expand=1
+Spaiker-grn: https://github.com/spaiker-grn/vk/commit/218269f5a384a0619b8b77a9aaf3ea546740284c
+
 *********************************************************
 #HW: 23.11.2017 - deadline (3.12.2017 23.59)
 
