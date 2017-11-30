@@ -3,13 +3,24 @@ package com.epam.training.imageloader;
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.AsyncTask;
 import android.support.v4.util.LruCache;
 import android.util.Log;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
+import com.epam.training.imageloader.cache.BaseDiskCache;
+import com.epam.training.imageloader.cache.DiskCache;
+import com.epam.training.imageloader.streams.FileStreamProvider;
+import com.epam.training.imageloader.streams.HttpStreamProvider;
+import com.epam.training.imageloader.util.IOUtils;
+
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.concurrent.BlockingDeque;
@@ -20,6 +31,29 @@ import java.util.concurrent.LinkedBlockingDeque;
 public enum Malevich {
 
     INSTANCE;
+
+    private Config config;
+    DiskCache diskCache;
+    private Drawable EMPTY_DRAWABLE = new ColorDrawable(255);
+
+    public void setConfig(Config config) {
+        this.config = config;
+        if (config.hasDiskCache()) {
+            diskCache = new BaseDiskCache(config.cacheDir);
+        }
+    }
+
+    public static class Config {
+        File cacheDir;
+
+        public Config(File cacheDir) {
+            this.cacheDir = cacheDir;
+        }
+
+        public boolean hasDiskCache() {
+            return cacheDir != null;
+        }
+    }
 
     private static final int MAX_MEMORY_FOR_IMAGES = 64 * 1024 * 1024;
 
@@ -36,7 +70,7 @@ public enum Malevich {
             @Override
             protected int sizeOf(final String key, final Bitmap value) {
                 return key.length() + value.getByteCount();
-        }
+            }
 
         };
     }
@@ -49,9 +83,7 @@ public enum Malevich {
         return Math.min((int) (Runtime.getRuntime().maxMemory() / 4), MAX_MEMORY_FOR_IMAGES);
     }
 
-    @SuppressLint("StaticFieldLeak")
     private void dispatchLoading() {
-
         new ImageResultAsyncTask().executeOnExecutor(executorService);
     }
 
@@ -62,7 +94,10 @@ public enum Malevich {
             if (imageView != null) {
                 Object tag = imageView.getTag();
                 if (tag != null && tag.equals(request.url)) {
-                    imageView.setImageBitmap(imageResult.getBitmap());
+                    TransitionDrawable drawable = new TransitionDrawable(new Drawable[]{EMPTY_DRAWABLE, new BitmapDrawable(imageResult.getBitmap())});
+                    imageView.setImageDrawable(drawable);
+                    drawable.startTransition(1000);
+//                    imageView.setImageBitmap(imageResult.getBitmap());
                 }
             }
         }
@@ -85,16 +120,18 @@ public enum Malevich {
     }
 
     private void deferImageRequest(final ImageRequest request) {
-        ImageView imageView = request.target.get();
+        final ImageView imageView = request.target.get();
+        if (imageView == null) return;
+
         imageView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
+                imageView.getViewTreeObserver().removeOnPreDrawListener(this);
                 ImageView view = request.target.get();
                 if (view == null) {
                     return true;
                 }
 
-                view.getViewTreeObserver().removeOnPreDrawListener(this);
 
                 if (view.getWidth() > 0 && view.getHeight() > 0) {
                     request.width = view.getWidth();
@@ -123,30 +160,34 @@ public enum Malevich {
 
     private Bitmap getScaledBitmap(InputStream inputStream, int w, int h) throws IOException {
 
-        // First decode with inJustDecodeBounds=true to check dimensions
-        final BitmapFactory.Options options = new BitmapFactory.Options();
+        try {
+            // First decode with inJustDecodeBounds=true to check dimensions
+            final BitmapFactory.Options options = new BitmapFactory.Options();
 
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(inputStream.available());
-        byte[] chunk = new byte[1 << 16];
-        int bytesRead;
-        while ((bytesRead = inputStream.read(chunk)) > 0) {
-            byteArrayOutputStream.write(chunk, 0, bytesRead);
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(inputStream.available());
+            byte[] chunk = new byte[1 << 16];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(chunk)) > 0) {
+                byteArrayOutputStream.write(chunk, 0, bytesRead);
+            }
+            byte[] bytes = byteArrayOutputStream.toByteArray();
+
+            options.inJustDecodeBounds = true;
+            BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
+
+            // Calculate inSampleSize
+            options.inSampleSize = calculateSampleSize(options, w, h);
+
+            // Decode bitmap with inSampleSize set
+            options.inJustDecodeBounds = false;
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
+            return bitmap;
+        } finally {
+            IOUtils.closeStream(inputStream);
         }
-        byte[] bytes = byteArrayOutputStream.toByteArray();
-
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
-
-        // Calculate inSampleSize
-        options.inSampleSize = calculateInSampleSize(options, w, h);
-
-        // Decode bitmap with inSampleSize set
-        options.inJustDecodeBounds = false;
-        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
-        return bitmap;
     }
 
-    private static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+    private static int calculateSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         // Raw height and width of image
         final int height = options.outHeight;
         final int width = options.outWidth;
@@ -159,19 +200,20 @@ public enum Malevich {
 
             // Calculate the largest inSampleSize value that is a power of 2 and keeps both
             // height and width larger than the requested height and width.
-            while (halfHeight > reqHeight
-                    && halfWidth > reqWidth) {
+            while ((halfHeight / inSampleSize) >= reqHeight
+                    && (halfWidth / inSampleSize) >= reqWidth) {
                 inSampleSize *= 2;
                 halfHeight /= 2;
                 halfWidth /= 2;
             }
         }
-        Log.d(TAG, "calculateInSampleSize: " + inSampleSize);
+        Log.d(TAG, "calculateSampleSize: " + inSampleSize);
         return inSampleSize;
     }
 
     private static final String TAG = "Malevich";
 
+    @SuppressLint("StaticFieldLeak")
     private class ImageResultAsyncTask extends AsyncTask<Void, Void, ImageResult> {
 
         @Override
@@ -182,28 +224,45 @@ public enum Malevich {
             try {
 
                 ImageRequest request = queue.takeFirst();
-                Log.d(TAG, "doInBackground: "+request.url);
+                Log.d(TAG, "doInBackground: " + request.url);
 
                 result = new ImageResult(request);
 
                 synchronized (lock) {
                     final Bitmap bitmap = lruCache.get(request.url);
                     if (bitmap != null) {
+                        Log.d(TAG, "doInBackground: from mem cache " + request.url);
                         result.setBitmap(bitmap);
                         return result;
                     }
                 }
 
+                Bitmap bitmap;
+                if (config.hasDiskCache()) {
+                    try {
+                        File file = diskCache.get(request.url);
+                        InputStream fileStream = new FileStreamProvider().get(file);
+                        bitmap = getScaledBitmap(fileStream, request.width, request.height);
+                        if (bitmap != null) {
+                            Log.d(TAG, "doInBackground: from disk cache " + request.url);
+                            result.setBitmap(bitmap);
+                            return result;
+                        }
+                    } catch (Exception e) {
+                        Log.e(TAG, "doInBackground: can't get file for "+ request.url, e);
+                    }
+                }
+
                 InputStream inputStream = new HttpStreamProvider().get(request.url);
 
-                Bitmap bitmap = getScaledBitmap(inputStream, request.height, request.width);
+                bitmap = getScaledBitmap(inputStream, request.height, request.width);
 
                 if (bitmap != null) {
+                    Log.d(TAG, "doInBackground: from network " + request.url);
                     result.setBitmap(bitmap);
-                    synchronized (lock) {
-                        lruCache.put(request.url, bitmap);
-                    }
-                } else throw new IllegalStateException("Bitmap is null");
+                    cacheBitmap(request, bitmap);
+                } else
+                    throw new IllegalStateException("Bitmap is null");
 
                 return result;
             } catch (Exception e) {
@@ -220,5 +279,19 @@ public enum Malevich {
             processImageResult(imageResult);
         }
 
+    }
+
+    private void cacheBitmap(ImageRequest request, Bitmap bitmap) {
+        synchronized (lock) {
+            lruCache.put(request.url, bitmap);
+        }
+
+        try {
+            if (config.hasDiskCache()) {
+                diskCache.save(request.url, bitmap);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "doInBackground: ", e);
+        }
     }
 }
