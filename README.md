@@ -21,9 +21,10 @@ Link to common issues comment https://github.com/IstiN/android-training-2017/iss
 *********************************************************
 
 *********************************************************
-#HW: 23.11.2017 - deadline (3.12.2017 23.59)
+#HW: 23.11.2017 - deadline (13.12.2017 23.59)
 
-Write own image loader, fix sample size calculation.
+Write own image loader (mem+file cache, configuration, request configuration etc.).
+
 
 *********************************************************
 

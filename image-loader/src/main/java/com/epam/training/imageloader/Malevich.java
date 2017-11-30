@@ -3,14 +3,18 @@ package com.epam.training.imageloader;
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.AsyncTask;
 import android.support.v4.util.LruCache;
 import android.util.Log;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
+import com.epam.training.imageloader.cache.BaseDiskCache;
 import com.epam.training.imageloader.cache.DiskCache;
-import com.epam.training.imageloader.cache.LimitedSizeDiskCache;
 import com.epam.training.imageloader.streams.FileStreamProvider;
 import com.epam.training.imageloader.streams.HttpStreamProvider;
 import com.epam.training.imageloader.util.IOUtils;
@@ -30,11 +34,12 @@ public enum Malevich {
 
     private Config config;
     DiskCache diskCache;
+    private Drawable EMPTY_DRAWABLE = new ColorDrawable(255);
 
     public void setConfig(Config config) {
         this.config = config;
         if (config.hasDiskCache()) {
-            diskCache = new LimitedSizeDiskCache(config.cacheDir);
+            diskCache = new BaseDiskCache(config.cacheDir);
         }
     }
 
@@ -89,7 +94,10 @@ public enum Malevich {
             if (imageView != null) {
                 Object tag = imageView.getTag();
                 if (tag != null && tag.equals(request.url)) {
-                    imageView.setImageBitmap(imageResult.getBitmap());
+                    TransitionDrawable drawable = new TransitionDrawable(new Drawable[]{EMPTY_DRAWABLE, new BitmapDrawable(imageResult.getBitmap())});
+                    imageView.setImageDrawable(drawable);
+                    drawable.startTransition(1000);
+//                    imageView.setImageBitmap(imageResult.getBitmap());
                 }
             }
         }
@@ -112,16 +120,18 @@ public enum Malevich {
     }
 
     private void deferImageRequest(final ImageRequest request) {
-        ImageView imageView = request.target.get();
+        final ImageView imageView = request.target.get();
+        if (imageView == null) return;
+
         imageView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
+                imageView.getViewTreeObserver().removeOnPreDrawListener(this);
                 ImageView view = request.target.get();
                 if (view == null) {
                     return true;
                 }
 
-                view.getViewTreeObserver().removeOnPreDrawListener(this);
 
                 if (view.getWidth() > 0 && view.getHeight() > 0) {
                     request.width = view.getWidth();
@@ -190,8 +200,8 @@ public enum Malevich {
 
             // Calculate the largest inSampleSize value that is a power of 2 and keeps both
             // height and width larger than the requested height and width.
-            while (halfHeight > reqHeight
-                    && halfWidth > reqWidth) {
+            while ((halfHeight / inSampleSize) >= reqHeight
+                    && (halfWidth / inSampleSize) >= reqWidth) {
                 inSampleSize *= 2;
                 halfHeight /= 2;
                 halfWidth /= 2;
@@ -239,7 +249,7 @@ public enum Malevich {
                             return result;
                         }
                     } catch (Exception e) {
-                        Log.e(TAG, "doInBackground: ", e);
+                        Log.e(TAG, "doInBackground: can't get file for "+ request.url, e);
                     }
                 }
 

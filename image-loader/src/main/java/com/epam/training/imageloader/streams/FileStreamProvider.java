@@ -14,6 +14,6 @@ public class FileStreamProvider implements StreamProvider<File> {
     @Override
     public InputStream get(File file) throws IOException {
         BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(file), BUFFER_SIZE);
-        return inputStream;//new ContentLengthInputStream(inputStream, (int) file.length());
+        return inputStream;
     }
 }
