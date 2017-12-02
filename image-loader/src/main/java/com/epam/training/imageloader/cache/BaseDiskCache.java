@@ -28,24 +28,24 @@ public class BaseDiskCache implements DiskCache {
     private final File cacheDir;
     private final long cacheSize;
 
-    public BaseDiskCache(File cacheDir) {
-        this.cacheDir = cacheDir;//todo create dir //new File(cacheDir, IMAGE_CACHE_DIR_NAME);
+    public BaseDiskCache(File pCacheDir) {
+        cacheDir = new File(pCacheDir, IMAGE_CACHE_DIR_NAME);
+
         if (!cacheDir.exists()) {
-            boolean mkdir = this.cacheDir.mkdirs();
+            boolean mkdir = cacheDir.mkdirs();
             if (!mkdir) {
                 throw new IllegalStateException("Can't create dir for images");
             }
 
         }
-        this.cacheDir.setWritable(true);
+        cacheDir.setWritable(true);
 
-        if (!this.cacheDir.canWrite()) {
+        if (!cacheDir.canWrite()) {
             throw new IllegalStateException("Can't write into dir for images");
         }
 
-        cacheSize = calculateDiskCacheSize(this.cacheDir);
+        cacheSize = calculateDiskCacheSize(cacheDir);
         freeSpaceIfRequired();
-
     }
 
     @Override
