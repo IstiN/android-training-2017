@@ -13,4 +13,6 @@ public class Constants {
     public static String PI_KEY = "pi_key";
     public static String RESULT_KEY = "result_key";
 
+    public static final int SDK_VERSION = 21;
+
 }

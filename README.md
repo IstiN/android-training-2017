@@ -105,6 +105,17 @@ https://developer.android.com/guide/topics/resources/providing-resources.html
 hotkey promoter plugin - https://plugins.jetbrains.com/plugin/4455-key-promoter
 Note. That lesson without homework
 
+
+How to see database.
+http://facebook.github.io/stetho/
+https://github.com/amitshekhariitbhu/Android-Debug-Database
+#HW
+1. Create database with few tables.
+2. Put model to database.
+3. Put model with related model to database.
+4. Select data from database and convert to model.
+
+
 #HW: 16.10.2017 - deadline (25 Oct. Sunday 23.59)
 1. create merge request to fix tests in training project
 2. to create example with Mockito @Captor (ArgumentCaptor<Callback<Long>>)
