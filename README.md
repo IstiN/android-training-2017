@@ -1,5 +1,7 @@
 # android-training-2017
 
+<b>!Защита проектов 15 января!</b>
+
 <b>If you have lessons at the university at same time with training and would like officially skip them on Monday, Thursday (18-21p.m.), please contact  Ivan_Ihnatsenka@epam.com</b>
 
 Project for android training
@@ -26,6 +28,17 @@ Kiolk: https://github.com/Kiolk/BullsAndCows/compare/review?expand=1
 Spaiker-grn: https://github.com/spaiker-grn/vk/commit/218269f5a384a0619b8b77a9aaf3ea546740284c
 
 *********************************************************
+
+How to see database.
+http://facebook.github.io/stetho/
+https://github.com/amitshekhariitbhu/Android-Debug-Database
+#HW
+1. Create database with few tables.
+2. Put model to database.
+3. Put model with related model to database.
+4. Select data from database and convert to model.
+
+
 #HW: 23.11.2017 - deadline (13.12.2017 23.59)
 
 Write own image loader (mem+file cache, configuration, request configuration etc.).
@@ -104,16 +117,6 @@ GPU Overdraw
 https://developer.android.com/guide/topics/resources/providing-resources.html
 hotkey promoter plugin - https://plugins.jetbrains.com/plugin/4455-key-promoter
 Note. That lesson without homework
-
-
-How to see database.
-http://facebook.github.io/stetho/
-https://github.com/amitshekhariitbhu/Android-Debug-Database
-#HW
-1. Create database with few tables.
-2. Put model to database.
-3. Put model with related model to database.
-4. Select data from database and convert to model.
 
 
 #HW: 16.10.2017 - deadline (25 Oct. Sunday 23.59)
