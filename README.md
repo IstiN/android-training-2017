@@ -1,6 +1,6 @@
 # android-training-2017
 
-<b>!Защита проектов 15 января!</b>
+#<b>!Защита проектов 15 января!</b>
 
 <b>If you have lessons at the university at same time with training and would like officially skip them on Monday, Thursday (18-21p.m.), please contact  Ivan_Ihnatsenka@epam.com</b>
 
