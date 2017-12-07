@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import com.epam.androidtraining.BuildConfig;
 import com.epam.androidtraining.Constants;
 import com.epam.androidtraining.db.models.UserDb;
-import com.epam.androidtraining.db.sql.Tables;
 import com.epam.androidtraining.mocks.Mocks;
 import com.epam.androidtraining.model.ListRegisteredUsers;
 import com.epam.androidtraining.model.RegisteredUser;
@@ -43,19 +42,11 @@ public class DatabaseTest {
     }
 
     @Test
-    public void putUserOverSql() {
-        SQLiteDatabase readableConnection = mSqlConnector.getReadableDatabase();
-        readableConnection.beginTransaction();
-        readableConnection.execSQL(Tables.INSERT_TEST_USER,
-                new Object[]{"alex", 124425345232l});
-        readableConnection.setTransactionSuccessful();
-        readableConnection.endTransaction();
-    }
-
-    @Test
     public void putRegisteredUsersToDb() {
         RegisteredUser[] usersArray = readRegisteredUsers();
         assertEquals(usersArray.length, 5);
+//        int resultCount =  IDbOperations.Imp.getInstance().bulkInsert(usersArray);
+//        assertEquals(resultCount, 5);
 
         SQLiteDatabase writeConnection = mSqlConnector.getWritableDatabase();
         writeConnection.beginTransaction();
@@ -75,13 +66,13 @@ public class DatabaseTest {
 
         SQLiteDatabase readableConnection = mSqlConnector.getReadableDatabase();
         Cursor cursor = readableConnection.query(UserDb.TABLE,
-                new String[]{UserDb.ID, UserDb.NAME, UserDb.REGISTERED},
+                null,
                 UserDb.NAME + "=? AND " + UserDb.REGISTERED + " NOT NULL",
                 new String[]{"Shelia Chang"}, null, null, null, null);
 
         final List<RegisteredUser> registeredUsers = new ArrayList<>();
         while (cursor.moveToNext()) {
-            String userId = cursor.getString(cursor.getColumnIndex(UserDb.ID));
+            String userId = cursor.getString(cursor.getColumnIndex(UserDb._ID));
             String userName = cursor.getString(cursor.getColumnIndex(UserDb.NAME));
             Long registered = cursor.getLong(cursor.getColumnIndex(UserDb.REGISTERED));
             RegisteredUser registeredUser = new RegisteredUser(userName, userId, registered, null);
@@ -112,7 +103,7 @@ public class DatabaseTest {
                 null,
                 null, null, null, null, null);
 
-        assertEquals(usersDbCursor.getCount(), 6);
+        assertEquals(usersDbCursor.getCount(), 0);
 
         usersDbCursor.close();
     }

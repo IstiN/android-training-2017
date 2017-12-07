@@ -1,6 +1,7 @@
 package com.epam.androidtraining.activities;
 
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,7 +23,7 @@ public class RecyclerViewSampleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable final Bundle pSavedInstanceState) {
         super.onCreate(pSavedInstanceState);
-        setContentView(R.layout.activity_recyclerview_sample);
+        setContentView(getLayoutId());
 
         loadData();
 
@@ -30,6 +31,10 @@ public class RecyclerViewSampleActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(false);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setAdapter(new MessageRecyclerAdapter(mMessageList));
+    }
+
+    private @LayoutRes int getLayoutId() {
+        return R.layout.activity_recyclerview_sample;
     }
 
     private void loadData() {
