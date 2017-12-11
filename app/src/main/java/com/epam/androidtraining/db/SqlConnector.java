@@ -26,48 +26,47 @@ public class SqlConnector extends SQLiteOpenHelper {
     private static final String TABLE_TEMPLATE =
             "CREATE TABLE IF NOT EXISTS %s (" + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,%s)";
 
-    public SqlConnector(Context context) {
+    public SqlConnector(final Context context) {
         //TODO read about SQLiteDatabase.CursorFactory
-        super(context, NAME, null, VERSION);
+        super(context, NAME, null, VERSION)
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onCreate(final SQLiteDatabase db) {
         createTables(db, DbModels.DB_MODELS);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
         Log.d("SqlConnector", "onUpgrade from " + oldVersion + " to " + newVersion);
     }
 
-
-    private void createTables(SQLiteDatabase readableConnection, Class<?>[] tableClassArray) {
+    private void createTables(final SQLiteDatabase readableConnection, final Class<?>[] tableClassArray) {
 
         readableConnection.beginTransaction();
 
         try {
-            for (Class<?> tableClass : tableClassArray) {
-                dbTable dbTableAnnotation = tableClass.getAnnotation(dbTable.class);
+            for (final Class<?> tableClass : tableClassArray) {
+                final dbTable dbTableAnnotation = tableClass.getAnnotation(dbTable.class);
                 if (dbTableAnnotation != null) {
-                    String dbTableName = dbTableAnnotation.value();
+                    final String dbTableName = dbTableAnnotation.value();
 
                     if (TextUtils.isEmpty(dbTableName)) {
                         return;
                     }
 
-                    StringBuilder stringBuilder = new StringBuilder();
+                    final StringBuilder stringBuilder = new StringBuilder();
 
-                    Field[] fields = tableClass.getFields();
+                    final Field[] fields = tableClass.getFields();
                     final int fieldCount = fields.length;
                     for (int i = 0; i < fieldCount; i++) {
-                        Field field = fields[i];
-                        Annotation[] fieldAnnotations = field.getAnnotations();
-                        String fieldName = (String) field.get(null);
+                        final Field field = fields[i];
+                        final Annotation[] fieldAnnotations = field.getAnnotations();
+                        final String fieldName = (String) field.get(null);
                         String fieldType = null;
 
-                        for (Annotation fieldAnnotation : fieldAnnotations) {
-                            Class<?> fieldAnnotationType = fieldAnnotation.annotationType();
+                        for (final Annotation fieldAnnotation : fieldAnnotations) {
+                            final Class<?> fieldAnnotationType = fieldAnnotation.annotationType();
                             if (fieldAnnotationType.equals(dbString.class)) {
                                 fieldType = ((dbString) fieldAnnotation).value();
                             } else if (fieldAnnotationType.equals(dbLong.class)) {
@@ -80,19 +79,18 @@ public class SqlConnector extends SQLiteOpenHelper {
                             }
                         }
 
-
                     }
 
                     //TODO think about solution if last field marked some annotation;
-                    stringBuilder.deleteCharAt(stringBuilder.length()-1);
+                    stringBuilder.deleteCharAt(stringBuilder.length() - 1);
 
-                    String tableCreteQuery = String.format(TABLE_TEMPLATE, dbTableName, stringBuilder.toString());
+                    final String tableCreteQuery = String.format(TABLE_TEMPLATE, dbTableName, stringBuilder.toString());
                     readableConnection.execSQL(tableCreteQuery);
 
                 }
             }
             readableConnection.setTransactionSuccessful();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Log.e(TAG, "create table exception", e);
         } finally {
             readableConnection.endTransaction();
