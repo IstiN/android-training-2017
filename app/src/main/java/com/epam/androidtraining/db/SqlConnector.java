@@ -28,7 +28,7 @@ public class SqlConnector extends SQLiteOpenHelper {
 
     public SqlConnector(final Context context) {
         //TODO read about SQLiteDatabase.CursorFactory
-        super(context, NAME, null, VERSION)
+        super(context, NAME, null, VERSION);
     }
 
     @Override
