@@ -46,8 +46,6 @@ public class MessageSlideFragment extends Fragment {
     }
 
     private void bindViews(final MessageModel pMessageModel) {
-        mDate.setText(pMessageModel.getDate());
-        mSender.setText(pMessageModel.getSender());
         mMessage.setText(pMessageModel.getMessage());
     }
 

@@ -39,6 +39,10 @@ https://github.com/amitshekhariitbhu/Android-Debug-Database
 4. Select data from database and convert to model.
 
 
+#HW: 14.12.2017 - deadline (25.12.2017 23.59)
+Buy notebook and take to next class
+
+
 #HW: 23.11.2017 - deadline (13.12.2017 23.59)
 
 Write own image loader (mem+file cache, configuration, request configuration etc.).

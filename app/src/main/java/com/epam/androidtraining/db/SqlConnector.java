@@ -33,6 +33,7 @@ public class SqlConnector extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(final SQLiteDatabase db) {
+        Log.d(TAG, "onCreate() called with: db = [" + db + "]");
         createTables(db, DbModels.DB_MODELS);
     }
 
@@ -86,7 +87,7 @@ public class SqlConnector extends SQLiteOpenHelper {
 
                     final String tableCreteQuery = String.format(TABLE_TEMPLATE, dbTableName, stringBuilder.toString());
                     readableConnection.execSQL(tableCreteQuery);
-
+                    Log.d(TAG, "createTables() returned: " + tableCreteQuery);
                 }
             }
             readableConnection.setTransactionSuccessful();

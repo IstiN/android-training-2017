@@ -1,6 +1,7 @@
 package com.epam.androidtraining.db;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -23,12 +24,16 @@ public interface IDbOperations {
 
         public static final String SYSTEM_SERVICE_NAME = "IDbOperations";
 
-        public static IDbOperations newInstance() {
-            return new DbOperations(new SqlConnector(ContextHolder.getContext()));
+        public static IDbOperations newInstance(Context context) {
+            return new DbOperations(new SqlConnector(context));
+        }
+
+        public static IDbOperations getInstance(Context context) {
+            return (IDbOperations) context.getApplicationContext().getSystemService(SYSTEM_SERVICE_NAME);
         }
 
         public static IDbOperations getInstance() {
-            return (IDbOperations) ContextHolder.getContext().getSystemService(SYSTEM_SERVICE_NAME);
+            return getInstance(ContextHolder.getContext());
         }
     }
 }

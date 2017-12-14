@@ -1,5 +1,6 @@
 package com.epam.androidtraining.adapter;
 
+import android.database.Cursor;
 import android.support.annotation.IntDef;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,10 +14,8 @@ import com.epam.training.imageloader.Malevich;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.ArrayList;
-import java.util.List;
 
-public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecyclerViewHolder> {
+public class MessageCursorRecyclerAdapter extends RecyclerView.Adapter<MessageRecyclerViewHolder> {
 
     @IntDef({MessageType.VIP, MessageType.USER})
     @Retention(RetentionPolicy.SOURCE)
@@ -26,15 +25,7 @@ public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecycler
         int USER = 1;
     }
 
-    private final List<MessageModel> mMessageList;
-
-    public MessageRecyclerAdapter() {
-        mMessageList = new ArrayList<>();
-    }
-
-    public MessageRecyclerAdapter(final List<MessageModel> pMessageList) {
-        mMessageList = pMessageList;
-    }
+    private Cursor cursor;
 
     @Override
     public MessageRecyclerViewHolder onCreateViewHolder(final ViewGroup pParent, final int pViewType) {
@@ -58,11 +49,14 @@ public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecycler
 
     @Override
     public void onBindViewHolder(final MessageRecyclerViewHolder pHolder, final int pPosition) {
-        final MessageModel messageModel = mMessageList.get(pPosition);
+        if (cursor == null) {
+            return;
+        }
+        cursor.moveToPosition(pPosition);
 
-        pHolder.mMessage.setText(messageModel.getMessage());
+        pHolder.mMessage.setText(cursor.getString(cursor.getColumnIndex(MessageModel.MessagesDb.MESSAGE)));
 
-        Malevich.INSTANCE.load(messageModel.getUrl()).into(pHolder.mImageView);
+        Malevich.INSTANCE.load(cursor.getString(cursor.getColumnIndex(MessageModel.MessagesDb.URL))).into(pHolder.mImageView);
     }
 
     @Override
@@ -76,12 +70,17 @@ public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecycler
 
     @Override
     public int getItemCount() {
-        return mMessageList.size();
+        return cursor != null ? cursor.getCount() : 0;
     }
 
-    public void setItems(List<MessageModel> items) {
-        mMessageList.clear();
-        mMessageList.addAll(items);
+    public void setItems(Cursor cursor) {
+        this.cursor = cursor;
         notifyDataSetChanged();
+    }
+
+    public void release() {
+        if (cursor != null) {
+            cursor = null;
+        }
     }
 }

@@ -44,8 +44,6 @@ public class MessageListViewAdapter extends ArrayAdapter<MessageModel> {
             viewHolder = (MessageListViewHolder) pConvertView.getTag();
         }
 
-        viewHolder.mDate.setText(messageModel.getDate());
-        viewHolder.mSender.setText(messageModel.getSender());
         viewHolder.mMessage.setText(messageModel.getMessage());
 
         return pConvertView;
