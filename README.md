@@ -40,7 +40,7 @@ https://github.com/amitshekhariitbhu/Android-Debug-Database
 
 
 #HW: 14.12.2017 - deadline (25.12.2017 23.59)
-Buy notebook and take to next class
+Buy laptop and take to next class
 
 
 #HW: 23.11.2017 - deadline (13.12.2017 23.59)
