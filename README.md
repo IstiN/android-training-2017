@@ -17,6 +17,12 @@ Project requirements:
 5. ImageLoader - no libraries! + File Cache + Memory Cache + Threadings
 6. Flavors
 
+#Queue for 21.12.2017
+1. Pasha Kalinin
+2. Evgeni Slizh
+3. Lali
+4. 
+
 *********************************************************
 Link to common issues comment https://github.com/IstiN/android-training-2017/issues/154#issuecomment-344004988 
 
