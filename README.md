@@ -21,7 +21,11 @@ Project requirements:
 1. Pasha Kalinin
 2. Evgeni Slizh
 3. Lali
-4. 
+
+#Review 18.12.2017 
+VasiliZ/RocketWheels  - https://github.com/VasiliZ/RocketWheels/commit/13af4fe8ab1f395a8b7cc34be6b12f1bafd85d19
+alexvishneuski/VCBestClient - https://github.com/alexvishneuski/VCBestClient/commit/a514f3c5ed59661f3153916326e65184a30ebf6d
+
 
 *********************************************************
 Link to common issues comment https://github.com/IstiN/android-training-2017/issues/154#issuecomment-344004988 
